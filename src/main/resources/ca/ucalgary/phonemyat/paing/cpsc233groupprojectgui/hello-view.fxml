@@ -1,16 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Load" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Reset " />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Add a Goal" />
+                        <MenuItem mnemonicParsing="false" text="Delete a Goal" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Add a Habit" />
+                        <MenuItem mnemonicParsing="false" text="Delete a Habit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <AnchorPane prefHeight="440.0" prefWidth="319.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="86.0" layoutY="6.0" text="Operations" />
+                <Label layoutX="31.0" layoutY="35.0" text="Goal">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+                <ChoiceBox layoutX="158.0" layoutY="36.0" prefHeight="26.0" prefWidth="143.0" />
+                <CheckBox layoutX="10.0" layoutY="79.0" mnemonicParsing="false" text="Categorize Goal">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </CheckBox>
+                <ChoiceBox layoutX="160.0" layoutY="74.0" prefHeight="26.0" prefWidth="139.0" />
+                <CheckBox layoutX="10.0" layoutY="108.0" mnemonicParsing="false" text="Create EisenHower Matrix">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </CheckBox>
+                <ChoiceBox layoutX="160.0" layoutY="103.0" prefHeight="26.0" prefWidth="139.0" />
+                <Label layoutX="42.0" layoutY="140.0" text="Habit">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+                <ChoiceBox layoutX="158.0" layoutY="134.0" prefHeight="26.0" prefWidth="143.0" />
+                <Button layoutX="89.0" layoutY="134.0" mnemonicParsing="false" text="Button" />
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="215.0" prefWidth="401.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <Separator layoutX="-2.0" layoutY="-137.0" orientation="VERTICAL" prefHeight="439.5" prefWidth="6.0" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-137.0" />
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox prefHeight="15.0" prefWidth="659.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" text="Status" />
+                <Separator prefWidth="200.0" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

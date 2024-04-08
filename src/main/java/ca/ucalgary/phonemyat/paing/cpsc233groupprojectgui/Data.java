@@ -7,9 +7,7 @@ import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Habit;
 import java.io.File;
 import java.io.PrintWriter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /** The data class stores all methods providing functionality to the tracker.

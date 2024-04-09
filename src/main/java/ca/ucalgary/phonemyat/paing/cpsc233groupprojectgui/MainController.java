@@ -4,8 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class MainController {
+
+    // Status bar
     @FXML
-    private Label welcomeText;
+    private Label statusLabel;
+
+    // Menu: Edit
+
+
 
     @FXML
     protected void onHelloButtonClick() {

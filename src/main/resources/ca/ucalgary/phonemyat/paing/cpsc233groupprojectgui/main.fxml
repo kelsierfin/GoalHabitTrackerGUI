@@ -109,7 +109,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="325.0">
                      <children>
-                        <Button fx:id="top3button" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" onAction="#viewTop3" prefHeight="29.0" prefWidth="205.0" text="View Top 3 Habits" />
+                        <Button fx:id="top3button" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="205.0" text="View Top 3 Habits" />
                         <Button fx:id="weekly" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="203.0" text="View the Weekly Completion" />
                         <Button layoutX="60.0" layoutY="150.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" text="View Tracker" />
                         <Button layoutX="62.0" layoutY="194.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="203.0" text="View Eishenhower Matrix" />

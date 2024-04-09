@@ -1,4 +1,4 @@
-package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
+package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.app;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,8 +14,10 @@ public class MainController {
     Alert a = new Alert(Alert.AlertType.NONE);
 
 
-    // Menu: Edit
+    // Menu: Add goals
+    protected void addGoals() {
 
+    }
 
 
 

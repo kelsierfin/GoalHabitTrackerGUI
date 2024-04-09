@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui/ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.MainGUI
+                                ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui/ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.app.MainGUI
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

@@ -1,4 +1,4 @@
-package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
+package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

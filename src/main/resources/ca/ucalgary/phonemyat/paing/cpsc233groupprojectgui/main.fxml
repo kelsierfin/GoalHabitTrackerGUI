@@ -209,7 +209,7 @@
             <children>
             <BorderPane>
                <center>
-                      <Label fx:id="statusMessage" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1191.0" text="Status" />
+                      <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1191.0" text="Status" />
                </center>
             </BorderPane>
             </children>

@@ -12,12 +12,16 @@ public class MainController {
     // Global Alert obj
     Alert a = new Alert(Alert.AlertType.NONE);
 
+    // Goals
+    private ChoiceBox<String> goalsDropDown;
+
 
     // Menu: Add goals
     protected void menuAddGoalsAction() {
 
         Dialog<String> dialog = new Dialog<>();
         dialog.setHeaderText("Add a Goal");
+        dialog.show();
 
 
 

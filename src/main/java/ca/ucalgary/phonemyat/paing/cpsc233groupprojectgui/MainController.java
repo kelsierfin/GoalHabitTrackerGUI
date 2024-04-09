@@ -17,11 +17,17 @@ public class MainController {
 
 
     // Menu: Add goals
+    @FXML
     protected void menuAddGoalsAction() {
 
         Dialog<String> dialog = new Dialog<>();
         dialog.setHeaderText("Add a Goal");
-        dialog.show();
+
+        TextField goalName = new TextField();
+        TextField idealCount = new TextField();
+
+        dialog.setContentText(String.valueOf(goalName));
+
 
 
 

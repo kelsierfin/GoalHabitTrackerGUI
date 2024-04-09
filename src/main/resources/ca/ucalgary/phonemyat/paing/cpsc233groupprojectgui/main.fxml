@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="916.0" prefWidth="1191.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="916.0" prefWidth="1191.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.MainController">
     <top>
         <MenuBar prefHeight="29.0" prefWidth="1191.0" BorderPane.alignment="CENTER">
             <menus>
@@ -31,7 +31,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Add a Goal" />
+                        <MenuItem mnemonicParsing="false" text="Add a Goal" onAction="#menuAddGoalsAction" />
                         <MenuItem mnemonicParsing="false" text="Delete a Goal" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Add a Habit" />

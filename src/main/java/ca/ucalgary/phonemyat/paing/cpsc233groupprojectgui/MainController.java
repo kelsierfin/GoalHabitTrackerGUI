@@ -2,6 +2,7 @@ package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+//test
 
 public class MainController {
     @FXML

@@ -55,7 +55,8 @@ public class MainController {
 
         // Add Buttons (OK and Cancel)
         ButtonType addGoal = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(addGoal, ButtonType.CANCEL);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(addGoal, cancel);
 
         // Create TextFields
         TextField goalNameTextField = new TextField();
@@ -107,6 +108,10 @@ public class MainController {
             return "";
         });
 
+        // Get the button bar to configure buttons
+        ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
+        buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
+
         dialog.show();
 
     }
@@ -115,14 +120,19 @@ public class MainController {
      // Create a dialog box with goal dropdown
      // User selects goal, and clicks delete
      // Call deleteAGoal method
+
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Delete a Goal");
+        dialog.setHeaderText("Select the name of the goal to delete");
+
+
     }
 
     /**
-     * Goals Drop Down: lists all goals to be used in various methods
+     * Goals Drop Down: lists all goals in the drop down to be used in various methods
      */
     protected void setGoalsDropDown() {
         // Populate dropdown with each goal in HashSet goals (from Data.java)
-
         HashSet<Goal> goals = data.getGoals();
         for (Goal goal : goals) {
             goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));

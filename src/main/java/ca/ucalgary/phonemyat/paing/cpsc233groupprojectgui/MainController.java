@@ -3,8 +3,10 @@ package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Goal;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Habit;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -35,7 +37,6 @@ public class MainController {
      */
     @FXML
     public void initialize() {
-
 
     }
 
@@ -133,6 +134,14 @@ public class MainController {
         // Get the ButtonBar and configure button order
         ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
         buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
+
+        // Link goalsDropDown
+        VBox container = new VBox(10);
+        container.setAlignment(Pos.CENTER);
+
+        dialog.getDialogPane().setContent(goalsDropDown);
+
+
 
         dialog.show();
 

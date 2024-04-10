@@ -216,7 +216,7 @@
                   <Insets left="50.0" />
                </HBox.margin>
             </Pane>
-            <Label fx:id="statusLabel" text="Label" />
+            <Label fx:id="statusLabel" text=" " />
             <Pane prefHeight="27.0" prefWidth="390.0">
                <HBox.margin>
                   <Insets right="50.0" />

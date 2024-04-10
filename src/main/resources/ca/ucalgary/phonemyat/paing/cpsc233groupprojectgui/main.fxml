@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -14,6 +15,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -31,7 +33,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Add a Goal" onAction="#menuAddGoalsAction" />
+                        <MenuItem mnemonicParsing="false" onAction="#menuAddGoalsAction" text="Add a Goal" />
                         <MenuItem mnemonicParsing="false" text="Delete a Goal" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Add a Habit" />
@@ -107,7 +109,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="325.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="317.0">
                      <children>
                         <Button fx:id="top3button" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="205.0" text="View Top 3 Habits" />
                         <Button fx:id="weekly" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="203.0" text="View the Weekly Completion" />
@@ -170,6 +172,11 @@
                     <content>
                       <AnchorPane prefHeight="282.0" prefWidth="882.0">
                            <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="856.0" text="Habit Overview" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </Label>
                               <HBox layoutX="-1.0" layoutY="40.0" prefHeight="53.0" prefWidth="857.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="85.0" prefWidth="185.0" text="Goal Name " textAlignment="CENTER" />
@@ -178,7 +185,7 @@
                                     <Label alignment="CENTER" prefHeight="53.0" prefWidth="247.0" text="Current Count" textAlignment="CENTER" />
                                  </children>
                               </HBox>
-                              <GridPane layoutY="104.0" prefHeight="163.0" prefWidth="854.0">
+                              <GridPane layoutX="2.0" layoutY="104.0" prefHeight="163.0" prefWidth="852.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -194,25 +201,25 @@
                            </children></AnchorPane>
                     </content>
                   </ScrollPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="856.0" text="Habit Overview" textAlignment="CENTER">
-                     <font>
-                        <Font name="Cambria" size="14.0" />
-                     </font>
-                  </Label>
                     </children>
                 </AnchorPane>
             </items>
         </SplitPane>
     </center>
     <bottom>
-        <HBox prefHeight="27.0" prefWidth="1119.0" BorderPane.alignment="CENTER">
-            <children>
-            <BorderPane>
-               <center>
-                      <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1191.0" text="Status" />
-               </center>
-            </BorderPane>
-            </children>
-        </HBox>
+        <HBox prefHeight="27.0" prefWidth="1119.0" BorderPane.alignment="CENTER" alignment="CENTER">
+         <children>
+            <Pane prefHeight="27.0" prefWidth="463.0">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Pane>
+            <Label text="Label" fx:id="statusLabel"/>
+            <Pane prefHeight="27.0" prefWidth="390.0">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </Pane>
+         </children></HBox>
     </bottom>
 </BorderPane>

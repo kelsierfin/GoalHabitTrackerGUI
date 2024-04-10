@@ -63,15 +63,21 @@ public class MainController {
                    String idealCount = idealCountTextfield.getText(); // Process as String first to check if empty later
 
                    if (!goalName.isEmpty() || !idealCount.isEmpty()) {
-                       if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
+                       Integer idealCountAsInt = Integer.parseInt(idealCount);
+                       if (idealCountAsInt <= 0 || idealCountAsInt > 7) {
+                           throw new NullPointerException(); // Process idealCount as null;
+                       } else if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
                            statusLabel.setText("Goal added successfully!");
                            statusLabel.setTextFill(Color.GREEN);
-                       };
+                       }
                    } else {
                        throw new NullPointerException();
                    }
                } catch (NullPointerException e){
-                   statusLabel.setText("Enter valid data");
+                   statusLabel.setText("Enter valid data!");
+                   statusLabel.setTextFill(Color.RED);
+               } catch (NumberFormatException e){
+                   statusLabel.setText("Enter valid data!");
                    statusLabel.setTextFill(Color.RED);
                }
             }

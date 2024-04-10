@@ -50,6 +50,15 @@ public class Data {
         return tracker;
     }
 
+    /** @description: Getter for goals HashSet
+     *
+     * @return Hashset<Goal> goals
+     */
+    public static HashSet<Goal> getGoals(){
+        return goals;
+    }
+
+
 
     /**
      * @description: This method set-ups the goal objects and adds to the goals hashset

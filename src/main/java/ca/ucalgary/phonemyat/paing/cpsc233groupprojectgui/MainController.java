@@ -58,11 +58,15 @@ public class MainController {
         ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(addGoal, cancel);
 
+        // Get the button bar to configure buttons
+        ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
+        buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
+
         // Create TextFields
         TextField goalNameTextField = new TextField();
         TextField idealCountTextfield = new TextField();
-//        goalNameTextField.setPromptText("Enter goal name");
-//        idealCountTextfield.setPromptText("Enter the ideal count");
+        goalNameTextField.setPromptText("Enter a string");
+        idealCountTextfield.setPromptText("Enter a digit (within 0-7)");
 
         // Add the fields to a grid
         GridPane addGoalsGrid = new GridPane();
@@ -108,15 +112,12 @@ public class MainController {
             return "";
         });
 
-        // Get the button bar to configure buttons
-        ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
-        buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
-
         dialog.show();
 
     }
 
-    protected void deleteAGoal() {
+    @FXML
+    protected void menuDeleteAGoalAction() {
      // Create a dialog box with goal dropdown
      // User selects goal, and clicks delete
      // Call deleteAGoal method
@@ -124,6 +125,18 @@ public class MainController {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Delete a Goal");
         dialog.setHeaderText("Select the name of the goal to delete");
+
+        // Add buttons (Delete and Cancel)
+        ButtonType delete = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(delete, cancel);
+        // Get the ButtonBar and configure button order
+        ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
+        buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
+
+        dialog.show();
+
+
 
 
     }

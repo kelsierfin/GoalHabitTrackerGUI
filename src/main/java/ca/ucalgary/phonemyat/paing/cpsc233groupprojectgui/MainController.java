@@ -1,5 +1,7 @@
 package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
 
+import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Goal;
+import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Habit;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -8,6 +10,9 @@ import javafx.scene.text.TextAlignment;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class MainController {
 
@@ -22,10 +27,25 @@ public class MainController {
     Alert a = new Alert(Alert.AlertType.NONE);
 
     // Goals
+    @FXML
     private ChoiceBox<String> goalsDropDown;
 
+    /**
+     * Initialize method to pre-load (set-up GUI)
+     */
+    @FXML
+    public void initialize() {
 
-    // Menu: Add goals
+
+    }
+
+
+
+    // Menu Items: Edit
+
+    /**
+     * Create goal objects using data.java
+     */
     @FXML
     protected void menuAddGoalsAction() {
 
@@ -69,6 +89,7 @@ public class MainController {
                        } else if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
                            statusLabel.setText("Goal added successfully!");
                            statusLabel.setTextFill(Color.GREEN);
+                           setGoalsDropDown();
                        }
                    } else {
                        throw new NullPointerException();
@@ -81,12 +102,37 @@ public class MainController {
                    statusLabel.setTextFill(Color.RED);
                }
             }
-            return null;
+
+
+            return "";
         });
+
         dialog.show();
+
+    }
+
+    protected void deleteAGoal() {
+     // Create a dialog box with goal dropdown
+     // User selects goal, and clicks delete
+     // Call deleteAGoal method
+    }
+
+    /**
+     * Goals Drop Down: lists all goals to be used in various methods
+     */
+    protected void setGoalsDropDown() {
+        // Populate dropdown with each goal in HashSet goals (from Data.java)
+
+        HashSet<Goal> goals = data.getGoals();
+        for (Goal goal : goals) {
+            goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
+        }
+
 
 
     }
+
+
 
 
 

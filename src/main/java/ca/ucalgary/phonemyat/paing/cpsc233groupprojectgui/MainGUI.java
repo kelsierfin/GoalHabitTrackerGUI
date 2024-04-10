@@ -13,6 +13,11 @@ public class MainGUI extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainGUI.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Habit Tracker!");
+        // Create controller object for initialization
+        MainController controller = new MainController();
+        controller.initialize();
+
+
         stage.setScene(scene);
         stage.show();
     }

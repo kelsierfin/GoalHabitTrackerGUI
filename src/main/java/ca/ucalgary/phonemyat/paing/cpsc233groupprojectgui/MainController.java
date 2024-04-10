@@ -63,14 +63,10 @@ public class MainController {
                    String idealCount = idealCountTextfield.getText(); // Process as String first to check if empty later
 
                    if (!goalName.isEmpty() || !idealCount.isEmpty()) {
-                       data.createAGoal(goalName, Integer.parseInt(idealCount), null);
-                       statusLabel.setText("Goal added successfully!");
-                       statusLabel.setTextFill(Color.GREEN);
-
-                       if (!data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {// If false (goal already exists)
-                           statusLabel.setText("This goal already exists");
-                           statusLabel.setTextFill(Color.RED);
-                       }
+                       if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
+                           statusLabel.setText("Goal added successfully!");
+                           statusLabel.setTextFill(Color.GREEN);
+                       };
                    } else {
                        throw new NullPointerException();
                    }

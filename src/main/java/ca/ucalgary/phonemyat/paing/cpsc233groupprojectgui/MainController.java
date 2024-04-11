@@ -209,7 +209,17 @@ public class MainController {
         updateStatus("Successfully Checking the About Action on from the menu bar.","green");
     }
 
-
+    /**
+     * Quit the application.
+     * This method is invoked when the user selects the 'Quit' option from the menu.
+     *
+     * @author: Phone Myat Paing
+     */
+    @FXML
+    public void close() {
+        // Close the application
+        Platform.exit();
+    }
 
 
 

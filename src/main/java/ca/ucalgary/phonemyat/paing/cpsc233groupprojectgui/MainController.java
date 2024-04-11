@@ -17,10 +17,7 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class MainController {
 
@@ -136,6 +133,70 @@ public class MainController {
                 updateStatus("Failed to load data from file.", "red");
             }
         }
+    }
+
+    // Member variables that hold the data
+    protected static ArrayList<Integer> choicesArrayList2;
+    protected static HashSet<Goal> goals;
+    protected static HashSet<Habit> habits;
+    protected static HashMap<String, ArrayList<String>> matrix;
+    protected static HashMap<String, ArrayList<String>> fields;
+    protected static HashMap<Goal, HashSet<Habit>> tracker;
+    protected static HashMap<String, Integer> habitAndICounts;
+    protected static HashMap<String, Integer> habitAndECounts;
+
+    @FXML
+    private void resetDataAction() {
+        // Show confirmation dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Reset Confirmation");
+        alert.setHeaderText("Reset All Data");
+        alert.setContentText("Are you sure you want to reset all data? This action cannot be undone.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Perform the reset
+            try {
+                resetAllData();
+                updateStatus("All data have been reset successfully.", "green");
+            } catch (Exception e) {
+                updateStatus("Failed to reset data: " + e.getMessage(), "red");
+            }
+        } else {
+            // User chose cancel
+            updateStatus("Resetting process cancelled.", "blue");
+        }
+    }
+
+
+    private void resetAllData() {
+        // Clear all data collections
+        if (choicesArrayList2 != null) {
+            choicesArrayList2.clear();}
+        if (goals != null) {
+            goals.clear();
+        }
+        if (habits != null) {
+            habits.clear();
+        }
+        if (matrix != null) {
+            matrix.clear();
+        }
+        if (fields != null) {
+            fields.clear();
+        }
+        if (tracker != null) {
+            tracker.clear();
+        }
+        if (habitAndICounts != null) {
+            habitAndICounts.clear();
+        }
+        if (habitAndECounts != null) {
+            habitAndECounts.clear();
+        }
+
+
+        // thinking about resetting the CSV file here
     }
 
     /**

@@ -145,6 +145,16 @@ public class MainController {
     protected static HashMap<String, Integer> habitAndICounts;
     protected static HashMap<String, Integer> habitAndECounts;
 
+
+    /**
+     * Invoked when the user selects the 'Reset' option from the menu.
+     * This method displays a confirmation dialog to the user. If the user
+     * confirms the action, it attempts to reset all application data and the CSV file.
+     * The method will update the GUI with the result of the reset operation.
+     * If the user cancels the operation, no changes are made, and a status update is displayed indicating that the reset has been canceled.
+     *
+     * @author: Phone Myat Paing
+     */
     @FXML
     private void resetDataAction() {
         // Show confirmation dialog
@@ -168,7 +178,11 @@ public class MainController {
         }
     }
 
-
+    /**
+     *  * This method is part of the reset process that reinitializes the application's data to a default state.
+     *
+     * @author: Phone Myat Paing
+     */
     private void resetAllData() {
         // Clear all data collections
         if (choicesArrayList2 != null) {

@@ -11,10 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class MainController {
 
@@ -31,6 +28,7 @@ public class MainController {
     // Goals
     @FXML
     private ChoiceBox<String> goalsDropDown;
+
     // Choices for the categories
     @FXML
     private ChoiceBox<String> myCategoryBox;
@@ -53,6 +51,7 @@ public class MainController {
      */
     @FXML
     public void initialize() {
+
 
     }
 
@@ -143,6 +142,7 @@ public class MainController {
         dialog.setTitle("Delete a Goal");
         dialog.setHeaderText("Select the name of the goal to delete");
 
+
         // Add buttons (Delete and Cancel)
         ButtonType delete = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -151,29 +151,62 @@ public class MainController {
         ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
         buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
 
-        // Link goalsDropDown
+        // Create a copy of goalsDropDown
+        ChoiceBox<String> goalsDropDownCopy = new ChoiceBox<>();
+        goalsDropDownCopy.setItems(goalsDropDown.getItems());
+        goalsDropDownCopy.setValue(goalsDropDown.getValue());
+
+
+        // Create a VBox so we can store the dropdown with padding around
         VBox container = new VBox(10);
         container.setAlignment(Pos.CENTER);
+        container.getChildren().add(goalsDropDownCopy); // Add dropdown to the vbox
+        dialog.getDialogPane().setContent(container); // Add container to dialog
 
-        dialog.getDialogPane().setContent(goalsDropDown);
+        // Use ResultConverter to get result when Delete/Cancel button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == delete) {
 
+                // Get the name of the goal from dropdown
+                String selectedValue = goalsDropDownCopy.getValue();
 
+                if (selectedValue == null) {
+                    statusLabel.setText("Select a goal"); // Tell user to select a goal before clicking Delete button
+                    statusLabel.setTextFill(Color.RED);
+                } else {
+                    if (data.goalDelete(selectedValue)) {
+                        statusLabel.setText("Goal deleted successfully");
+                        statusLabel.setTextFill(Color.GREEN);
+                        // Update goalsDropDown
+                        setGoalsDropDown();
+                    } else {
+                        statusLabel.setText("Error deleting goal");
+                        statusLabel.setTextFill(Color.RED);
+                    }
+                }
+
+                return goalsDropDown.getValue();
+            }
+            return null; // Return null if Cancel button is clicked
+        });
 
         dialog.show();
-
-
 
 
     }
 
     /**
-     * Goals Drop Down: lists all goals in the drop down to be used in various methods
+     * Goals Drop Down: lists all goals in the drop down to be used in various methods. Also used to update dropdown.
      */
     protected void setGoalsDropDown() {
+        // First, clear the dropdown. (Prevents duplicates)
+        goalsDropDown.getItems().clear();
         // Populate dropdown with each goal in HashSet goals (from Data.java)
         HashSet<Goal> goals = data.getGoals();
         for (Goal goal : goals) {
+            if (goal != null) {
             goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
+            }
         }
 
 

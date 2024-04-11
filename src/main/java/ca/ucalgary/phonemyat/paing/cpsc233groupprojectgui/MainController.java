@@ -2,6 +2,7 @@ package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
 
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Goal;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Habit;
+import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.util.FileLoader;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.util.FileSaver;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -103,6 +104,40 @@ public class MainController {
         }
     }
 
+
+    /**
+     * Load the existing process from a file.
+     * This method is invoked when the user selects the 'Load' option form the menu.
+     *
+     * @author: Phone Myat Paing
+     */
+    @FXML
+    private void loadAction() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter for CSV files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Get the current window for the dialog
+        Window stage = statusLabel.getScene().getWindow();
+
+        // Show open file dialog
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            // Load the data from the file
+            Data loadedData = FileLoader.load(file);
+
+            if (loadedData != null) {
+                data = loadedData; // Update the data model
+                updateStatus("Data loaded successfully from " + file.getName(), "green");
+            } else {
+                updateStatus("Failed to load data from file.", "red");
+            }
+        }
+    }
+
     /**
      * Quit the application.
      * This method is invoked when the user selects the 'Quit' option from the menu.
@@ -110,7 +145,7 @@ public class MainController {
      * @author: Phone Myat Paing
      */
     @FXML
-    public void close() {
+    public void closeAction() {
         // Close the application
         Platform.exit();
     }
@@ -245,7 +280,7 @@ public class MainController {
      */
 
     @FXML
-    private void about(){
+    private void aboutAction(){
         //Create an alert dialog to display information about the application
         Alert aboutAlert = new Alert(Alert.AlertType.CONFIRMATION);
         aboutAlert.setTitle("About");

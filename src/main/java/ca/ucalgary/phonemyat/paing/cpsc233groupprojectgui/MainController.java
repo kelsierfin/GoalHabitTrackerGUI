@@ -31,6 +31,19 @@ public class MainController {
     // Goals
     @FXML
     private ChoiceBox<String> goalsDropDown;
+    // Choices for the categories
+    @FXML
+    private ChoiceBox<String> myCategoryBox;
+    // Choices for the matrix Quadrants
+    @FXML
+    private ChoiceBox<String> myMatrixBox;
+    // Buttpn to initiate the setCategory method
+    @FXML
+    private Button categoryButton;
+    // Button to intialize the setMatrix method
+    @FXML
+    private Button matrixButton;
+
 
     /**
      * Initialize method to pre-load (set-up GUI)
@@ -161,7 +174,22 @@ public class MainController {
         }
 
 
+    }
+    @FXML
+    protected void getCategoryChoice() {
+        String categoryChoice = myCategoryBox.getValue();
+        String goalChoice = goalsDropDown.getValue();
+        data.setCategory(categoryChoice, goalChoice);
 
+        statusLabel.setText("You have set goal: " + goalChoice + " into Category: " + categoryChoice);
+    }
+    @FXML
+    protected void getMatrixChoice() {
+        String matrixChoice = myMatrixBox.getValue();
+        String goalChoice2 = goalsDropDown.getValue();
+
+        data.setMatrix(matrixChoice, goalChoice2);
+        statusLabel.setText("You have set goal: " + goalChoice2 + " into Quadrant: " + matrixChoice);
     }
 
 
@@ -169,4 +197,8 @@ public class MainController {
 
 
 
-}
+
+
+
+
+    }

@@ -24,6 +24,12 @@ public class Data {
     protected static HashMap<String, ArrayList<String>> matrix; // intializes the eisenhower matrix so that it can be changed anywhere in package
 
     protected static HashMap<String, ArrayList<String>> fields; // intializes the categorization matrix so that it can be changed anywhere in packag
+    protected static HashMap<String, ArrayList<String>> matrix2; // used for the GUI
+    protected static ArrayList<String> list10 = new ArrayList<>(); // used for GUI Matrix
+    protected static ArrayList<String> list20 = new ArrayList<>(); // used for GUI Matrix
+    protected static ArrayList<String> list30 = new ArrayList<>(); // used for GUI matrix
+    protected static ArrayList<String> list40 = new ArrayList<>(); // Used for GUI Matrix
+
 
     protected static HashMap<Goal, HashSet<Habit>> tracker; // Maps each goal object to hashset<Habit> habits associated with it
     protected static HashMap<String, Integer> habitAndICounts; // Stores each habit and its ideal count
@@ -34,6 +40,7 @@ public class Data {
         this.goals = new HashSet<>();
         this.habits = new HashSet<>();
         this.matrix = new HashMap<>();
+        this.matrix2 = new HashMap<>();
         this.fields = new HashMap<>();
         this.tracker = new HashMap<>();
         this.habitAndICounts = new HashMap<>();
@@ -543,7 +550,35 @@ public class Data {
         }
         return fieldExist;
     }
-}
+    public static void setCategory(String categoryChoice, String goalChoice) {
+        for (Goal goal : goals) {
+            if (goal.getGoal().equals(goalChoice)) {
+                goal.setCategory(categoryChoice);
+            }
+        }
+    }
+    public static void setMatrix(String matrixChoice, String goalChoice2) {
+        if(matrixChoice.equals("Urgent and Important")){
+            list10.add(goalChoice2);
+        }
+        if(matrixChoice.equals("Urgent and Not Important")){
+            list20.add(goalChoice2);
+        }
+        if(matrixChoice.equals("Important and Not Urgent")){
+            list30.add(goalChoice2);
+        }
+        if(matrixChoice.equals("Not Important and Not Urgent")){
+            list40.add(goalChoice2);
+        }
+
+        matrix2.put("Urgent and Important",list10);
+        matrix2.put("Urgent and Not Important",list20);
+        matrix2.put("Important and Not Urgent",list30);
+        matrix2.put("Not Important and Not Urgent",list40);
+
+    }
+
+    }
 
 
 

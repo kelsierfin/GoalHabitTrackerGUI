@@ -40,7 +40,17 @@ public class MainController {
      */
     @FXML
     public void initialize() {
+        populateHabitsDropDown();
+    }
 
+
+    @FXML
+    private ChoiceBox<String> habitsDropDown;
+
+    private void populateHabitsDropDown() {
+        Data.getTracker().values().forEach(habitsSet -> habitsSet.forEach(habit -> {
+            habitsDropDown.getItems().add(habit.getHabit());
+        }));
     }
 
     /**
@@ -226,6 +236,8 @@ public class MainController {
     }
 
 
+
+
     // Menu Items: Edit
 
     /**
@@ -251,7 +263,7 @@ public class MainController {
         TextField goalNameTextField = new TextField();
         TextField idealCountTextfield = new TextField();
         goalNameTextField.setPromptText("Enter a string");
-        idealCountTextfield.setPromptText("Enter a digit (within 0-7)");
+        idealCountTextfield.setPromptText("Enter a digit (within 1-7)");
 
         // Add the fields to a grid
         GridPane addGoalsGrid = new GridPane();
@@ -345,7 +357,6 @@ public class MainController {
         }
     }
 
-
     // Menu Help/ About
     /**
      * Display information about the application.
@@ -370,7 +381,60 @@ public class MainController {
     }
 
 
+    // Count Increasing Process
+    @FXML
+    private void increaseHabitCount() {
+        // Check if habitsDropDown itself is not null
+//        if (habitsDropDown == null) {
+//            updateStatus("Habit dropdown is not initialized.", "red");
+//            return;
+//        }
+
+        String selectedHabitName = habitsDropDown.getValue();
+        if (selectedHabitName == null || selectedHabitName.isEmpty()) {
+            updateStatus("Please select a habit.", "red");
+            return;
+        }
+
+        Habit habit = findHabitByName(selectedHabitName);
+        if (habit == null) {
+            updateStatus("Selected habit not found.", "red");
+            return;
+        }
+
+        habit.incrementCurrentCount();
+        updateStatus("Habit '" + selectedHabitName + "' count increased to " + habit.getCurrentCount() + ".", "green");
+    }
+
+    public Habit findHabitByName(String habitName) {
+        if (habitName == null) return null;
+
+        for (HashSet<Habit> habits : tracker.values()) {
+            for (Habit habit : habits) {
+                if (habit.getHabit().equalsIgnoreCase(habitName)) {
+                    return habit;
+                }
+            }
+        }
+        return null;
+    }
 
 
+//        @FXML
+//        private void increaseHabitCount() {
+//            String selectedHabitName = habitChoiceBox.getValue();
+//            if (selectedHabitName == null || selectedHabitName.isEmpty()) {
+//                updateStatus("Please select a habit.", "red");
+//                return;
+//            }
+//
+//            // Assuming 'updateHabitCompletion' updates the count and returns true if successful
+//            boolean success = data.updateHabitCompletion(selectedHabitName);
+//            if (success) {
+//                updateStatus("Habit '" + selectedHabitName + "' count increased successfully.", "green");
+//            } else {
+//                updateStatus("Failed to increase count for habit '" + selectedHabitName + "'.", "red");
+//            }
+//        }
 
 }

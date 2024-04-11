@@ -31,6 +31,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#resetDataAction" text="Reset " />
                     </items>
                 </Menu>
+
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#menuAddGoalsAction" text="Add a Goal" />
@@ -72,7 +73,7 @@
                               <Font name="Consolas Italic" size="14.0" />
                            </font>
                         </Label>
-                            <Button layoutX="175.0" layoutY="507.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Increase Count" />
+                            <Button layoutX="175.0" layoutY="507.0" mnemonicParsing="false" onAction="#increaseHabitCount" prefHeight="25.0" prefWidth="117.0" text="Increase Count" />
                         <Label contentDisplay="CENTER" layoutX="14.0" layoutY="429.0" prefHeight="35.0" prefWidth="176.0" text="Count Management">
                            <font>
                               <Font name="Consolas Italic" size="14.0" />
@@ -84,7 +85,7 @@
                            </font>
                         </Label>
                         <ChoiceBox layoutX="161.0" layoutY="332.0" prefHeight="38.0" prefWidth="146.0" />
-                        <ChoiceBox layoutX="161.0" layoutY="464.0" prefHeight="38.0" prefWidth="146.0" />
+                        <ChoiceBox fx:id="habitsDropDown" layoutX="161.0" layoutY="464.0" prefHeight="38.0" prefWidth="146.0" />
                         <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="9.0" layoutY="334.0" prefHeight="35.0" prefWidth="144.0" text="Choose the location:" textAlignment="RIGHT">
                            <font>
                               <Font name="Consolas Italic" size="12.0" />

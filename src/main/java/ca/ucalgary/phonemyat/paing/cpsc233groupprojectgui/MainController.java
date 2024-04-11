@@ -2,6 +2,7 @@ package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
 
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Goal;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Habit;
+import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.util.FileSaver;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -10,7 +11,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,6 +45,75 @@ public class MainController {
 
     }
 
+    /**
+     * Update the status label with specified message and color.
+     *
+     * @author: Phone Myat Paing
+     * @param message The message to display
+     * @param color   The color of the text
+     */
+    public void updateStatus(String message, String color) {
+        String fontSize = "14px"; // Fixed font size
+        String fontFamily = "CoolReader"; // Fixed font family
+        String fontStyle = "italic"; // Fixed italic style
+
+        Platform.runLater(() -> {
+            statusLabel.setText(message);
+            statusLabel.setStyle("-fx-text-fill:" + color + ";" +
+                    "-fx-font-size:" + fontSize + ";" +
+                    "-fx-font-family:" + fontFamily + ";" +
+                    "-fx-font-style:" + fontStyle + ";");
+            statusLabel.applyCss();
+            statusLabel.layout();
+        });
+    }
+
+    /**
+     * Save the current tracker to a file.
+     * This method is invoked when the user selects the 'Save' option from the menu.
+     *
+     * @author: Phone Myat Paing
+     */
+    @FXML
+    private void saveAction() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Define the initial file name
+        fileChooser.setInitialFileName("tracker_data.csv");
+
+        // Get the current window for the dialog
+        Window stage = statusLabel.getScene().getWindow();
+
+        // Show save file dialog
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            // Save the data to the file
+            boolean success = FileSaver.save(file, data);
+
+            if (success) {
+                updateStatus("File saved successfully.", "green");
+            } else {
+                updateStatus("Failed to save file.", "red");
+            }
+        }
+    }
+
+    /**
+     * Quit the application.
+     * This method is invoked when the user selects the 'Quit' option from the menu.
+     *
+     * @author: Phone Myat Paing
+     */
+    @FXML
+    public void close() {
+        // Close the application
+        Platform.exit();
+    }
 
 
     // Menu Items: Edit
@@ -163,29 +236,6 @@ public class MainController {
     }
 
 
-    /**
-     * Update the status label with specified message and color.
-     *
-     * @author: Phone Myat Paing
-     * @param message The message to display
-     * @param color   The color of the text
-     */
-    public void updateStatus(String message, String color) {
-        String fontSize = "14px"; // Fixed font size
-        String fontFamily = "CoolReader"; // Fixed font family
-        String fontStyle = "italic"; // Fixed italic style
-
-        Platform.runLater(() -> {
-            statusLabel.setText(message);
-            statusLabel.setStyle("-fx-text-fill:" + color + ";" +
-                    "-fx-font-size:" + fontSize + ";" +
-                    "-fx-font-family:" + fontFamily + ";" +
-                    "-fx-font-style:" + fontStyle + ";");
-            statusLabel.applyCss();
-            statusLabel.layout();
-        });
-    }
-
     // Menu Help/ About
     /**
      * Display information about the application.
@@ -209,17 +259,6 @@ public class MainController {
         updateStatus("Successfully Checking the About Action on from the menu bar.","green");
     }
 
-    /**
-     * Quit the application.
-     * This method is invoked when the user selects the 'Quit' option from the menu.
-     *
-     * @author: Phone Myat Paing
-     */
-    @FXML
-    public void close() {
-        // Close the application
-        Platform.exit();
-    }
 
 
 

@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="826.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.MainController">
     <top>
         <MenuBar prefHeight="29.0" prefWidth="1191.0" BorderPane.alignment="CENTER">
             <menus>
@@ -42,7 +42,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
                     </items>
                 </Menu>
             </menus>
@@ -216,7 +216,7 @@
                   <Insets left="50.0" />
                </HBox.margin>
             </Pane>
-            <Label fx:id="statusLabel" text=" " />
+            <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="30.0" maxWidth="800.0" minHeight="30.0" minWidth="800.0" text=" " />
             <Pane prefHeight="27.0" prefWidth="390.0">
                <HBox.margin>
                   <Insets right="50.0" />

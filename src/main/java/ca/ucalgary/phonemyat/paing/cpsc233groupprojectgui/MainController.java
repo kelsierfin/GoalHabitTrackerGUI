@@ -43,6 +43,9 @@ public class MainController {
     // Button to intialize the setMatrix method
     @FXML
     private Button matrixButton;
+    // Show the matrix button
+    @FXML
+    private Button matrixShower;
 
 
     /**
@@ -175,6 +178,10 @@ public class MainController {
 
 
     }
+
+    /**
+     * getCategoryChoice: the sets the category for the goal choice to the chosen category using a method in data
+     */
     @FXML
     protected void getCategoryChoice() {
         String categoryChoice = myCategoryBox.getValue();
@@ -183,6 +190,9 @@ public class MainController {
 
         statusLabel.setText("You have set goal: " + goalChoice + " into Category: " + categoryChoice);
     }
+    /**
+     * getMatrixChoice: the sets the matrix quadrant for the goal choice to the chosen quadrant using a method in data
+     */
     @FXML
     protected void getMatrixChoice() {
         String matrixChoice = myMatrixBox.getValue();
@@ -190,6 +200,25 @@ public class MainController {
 
         data.setMatrix(matrixChoice, goalChoice2);
         statusLabel.setText("You have set goal: " + goalChoice2 + " into Quadrant: " + matrixChoice);
+
+
+    }
+    /**
+     * matrixShower: this uses an alert to show the current matrix;
+     */
+
+    @FXML
+    protected void showMatrix(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Goals in Eisenhower Matrix");
+        alert.setHeaderText("Here is your current Eisenhower Matrix");
+
+        alert.setContentText(String.valueOf(data.matrix2));
+        alert.showAndWait();
+
+
+
+
     }
 
 

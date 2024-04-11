@@ -550,6 +550,12 @@ public class Data {
         }
         return fieldExist;
     }
+
+    /**
+     * @param: categoryChoice - this is the category choice for the goal, goalChoice - this is the goal we are pointing
+     * @description it just sets the category for a specific goal.
+     * @return:none
+     */
     public static void setCategory(String categoryChoice, String goalChoice) {
         for (Goal goal : goals) {
             if (goal.getGoal().equals(goalChoice)) {
@@ -557,6 +563,12 @@ public class Data {
             }
         }
     }
+    /**
+     * @param: matrixChoice - this is the quadrant to put the goal into , goalChoice2 - the goal we are going to be putting into quadrant
+     * @description used to set a specific matrix quadrant for a goal
+     * @return: it doesn't return anything  but rather just add to a preexisting hashmap
+     */
+
     public static void setMatrix(String matrixChoice, String goalChoice2) {
         if(matrixChoice.equals("Urgent and Important")){
             list10.add(goalChoice2);

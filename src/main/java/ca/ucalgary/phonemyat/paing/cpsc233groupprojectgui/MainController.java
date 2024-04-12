@@ -663,6 +663,40 @@ public class MainController {
 
 
     /**
+     * Handles the action triggered by clicking the "View the Weekly Completion" button.
+     * It asks the user if they want to see their weekly completion percentage for each habit.
+     * If confirmed, it displays another alert showing the completion rates for all habits.
+     */
+    @FXML
+    private void viewWeeklyCompletionAction() {
+        // Create a confirmation dialog
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Action");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Do you want to see your weekly completion percentage for each habit?");
+
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Calculate and display completion rates
+            Map<String, Double> completionRates = Data.calculateWeeklyCompletionRates();
+            StringBuilder contentText = new StringBuilder();
+            completionRates.forEach((habit, rate) ->
+                    contentText.append(String.format("Habit: %s, Completion Rate: %.0f%%\n", habit, rate)));
+
+            // Show the completion rates in another alert dialog
+            Alert ratesAlert = new Alert(Alert.AlertType.INFORMATION);
+            ratesAlert.setTitle("Weekly Completion Rates");
+            ratesAlert.setHeaderText("Here are your weekly completion rates:");
+            ratesAlert.setContentText(contentText.toString());
+            ratesAlert.showAndWait();
+        } else {
+            // Handle cancellation
+            updateStatus("Viewing weekly completion rates cancelled.", "blue");
+        }
+    }
+
+
+    /**
      * getCategoryChoice: the sets the category for the goal choice to the chosen category using a method in data
      * @author: Sanbeer
      */

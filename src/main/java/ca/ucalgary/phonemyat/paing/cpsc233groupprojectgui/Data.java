@@ -177,7 +177,7 @@ public class Data {
      * @param habitToDelete The name of the habit to remove
      */
 
-    public static void deleteHabitsFromGoal(String goalName, String habitToDelete) {
+    public static boolean deleteHabitsFromGoal(String goalName, String habitToDelete) {
 
 
         Goal goalOfInterest = null;
@@ -203,13 +203,15 @@ public class Data {
                     iterator.remove();
                     System.out.println("Habit removed successfully");
                     tracker.put(goalOfInterest, habitsSet);
+                    return true;
                 }
             }
         } else {
             System.out.println("Enter a valid Goal/Habit");
+            return false;
         }
 
-
+    return false;
     }
 
 

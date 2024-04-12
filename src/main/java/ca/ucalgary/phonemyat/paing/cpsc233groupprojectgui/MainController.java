@@ -19,6 +19,8 @@ import javax.management.StringValueExp;
 import java.io.File;
 import java.util.*;
 
+import static ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.Data.*;
+
 public class MainController {
 
     // Data obj
@@ -169,27 +171,23 @@ public class MainController {
         File file = fileChooser.showOpenDialog(stage);
 
         if (file != null) {
+
+            //clear the current existing data, in case there is some unnecessary data
+            habitsDropDown.getItems().clear();
+            goalsDropDown.getItems().clear();
             // Load the data from the file
             Data loadedData = FileLoader.load(file);
 
             if (loadedData != null) {
                 data = loadedData; // Update the data model
+                populateHabitsDropDown();
+                setGoalsDropDown();
                 updateStatus("Data loaded successfully from " + file.getName(), "green");
             } else {
                 updateStatus("Failed to load data from file.", "red");
             }
         }
     }
-
-    // Member variables that hold the data
-    protected static ArrayList<Integer> choicesArrayList2;
-    protected static HashSet<Goal> goals;
-    protected static HashSet<Habit> habits;
-    protected static HashMap<String, ArrayList<String>> matrix;
-    protected static HashMap<String, ArrayList<String>> fields;
-    protected static HashMap<Goal, HashSet<Habit>> tracker;
-    protected static HashMap<String, Integer> habitAndICounts;
-    protected static HashMap<String, Integer> habitAndECounts;
 
 
     /**
@@ -225,21 +223,17 @@ public class MainController {
     }
 
 
-/// This part still needs modification
+
     /**
      *  * This method is part of the reset process that reinitializes the application's data to a default state.
      *
      * @author: Phone Myat Paing
      */
     private void resetAllData() {
-        // Clear all data collections
         if (choicesArrayList2 != null) {
             choicesArrayList2.clear();}
         if (goals != null) {
             goals.clear();
-        }
-        if (habits != null) {
-            habits.clear();
         }
         if (matrix != null) {
             matrix.clear();
@@ -247,18 +241,29 @@ public class MainController {
         if (fields != null) {
             fields.clear();
         }
-        if (tracker != null) {
-            tracker.clear();
+        if (matrix2 != null){
+            matrix2.clear();
         }
-        if (habitAndICounts != null) {
-            habitAndICounts.clear();
+        if (list10 != null){
+            list10.clear();
         }
-        if (habitAndECounts != null) {
-            habitAndECounts.clear();
+        if (list20 != null){
+            list20.clear();
+        }
+        if (list30 != null){
+            list30.clear();
+        }
+        if (list40 != null){
+            list40.clear();
         }
 
+        if (goalsDropDown != null){
+            goalsDropDown.getItems().clear();
+        }
 
-        // thinking about resetting the CSV file here
+        if (habitsDropDown != null){
+            habitsDropDown.getItems().clear();
+        }
     }
 
 
@@ -317,30 +322,30 @@ public class MainController {
         // Convert result to string when "Add" button is clicked. Result Converter processes user input when the "Add" button is clicked.
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addGoal) {
-               try {
-                   // Create vars
-                   String goalName = goalNameTextField.getText().toLowerCase();
-                   String idealCount = idealCountTextfield.getText(); // Process as String first to check if empty later
+                try {
+                    // Create vars
+                    String goalName = goalNameTextField.getText().toLowerCase();
+                    String idealCount = idealCountTextfield.getText(); // Process as String first to check if empty later
 
-                   if (!goalName.isEmpty() || !idealCount.isEmpty()) {
-                       Integer idealCountAsInt = Integer.parseInt(idealCount);
-                       if (idealCountAsInt <= 0 || idealCountAsInt > 7) {
-                           throw new NullPointerException(); // Process idealCount as null;
-                       } else if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
-                           statusLabel.setText("Goal added successfully!");
-                           statusLabel.setTextFill(Color.GREEN);
-                           setGoalsDropDown();
-                       }
-                   } else {
-                       throw new NullPointerException();
-                   }
-               } catch (NullPointerException e){
-                   statusLabel.setText("Enter valid data!");
-                   statusLabel.setTextFill(Color.RED);
-               } catch (NumberFormatException e){
-                   statusLabel.setText("Enter valid data!");
-                   statusLabel.setTextFill(Color.RED);
-               }
+                    if (!goalName.isEmpty() || !idealCount.isEmpty()) {
+                        Integer idealCountAsInt = Integer.parseInt(idealCount);
+                        if (idealCountAsInt <= 0 || idealCountAsInt > 7) {
+                            throw new NullPointerException(); // Process idealCount as null;
+                        } else if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
+                            statusLabel.setText("Goal added successfully!");
+                            statusLabel.setTextFill(Color.GREEN);
+                            setGoalsDropDown();
+                        }
+                    } else {
+                        throw new NullPointerException();
+                    }
+                } catch (NullPointerException e){
+                    statusLabel.setText("Enter valid data!");
+                    statusLabel.setTextFill(Color.RED);
+                } catch (NumberFormatException e){
+                    statusLabel.setText("Enter valid data!");
+                    statusLabel.setTextFill(Color.RED);
+                }
             }
 
 
@@ -353,9 +358,9 @@ public class MainController {
 
     @FXML
     protected void menuDeleteAGoalAction() {
-     // Create a dialog box with goal dropdown
-     // User selects goal, and clicks delete
-     // Call deleteAGoal method
+        // Create a dialog box with goal dropdown
+        // User selects goal, and clicks delete
+        // Call deleteAGoal method
 
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Delete a Goal");
@@ -425,7 +430,7 @@ public class MainController {
         HashSet<Goal> goals = data.getGoals();
         for (Goal goal : goals) {
             if (goal != null) {
-            goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
+                goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
             }
         }
     }
@@ -470,36 +475,36 @@ public class MainController {
         dialog.getDialogPane().setContent(container); // Add container to dialog
 
         dialog.setResultConverter(dialogButton -> {
-                if (dialogButton == add) {
+            if (dialogButton == add) {
 
-                    // Get the user-input
-                    String goalName = goalsDropDownCopy.getValue();
-                    String habitsInputAsString = habitsInput.getText().replaceAll("\\s", ""); // Remove all whitespace
-                    String[] habitsInputSplit = habitsInputAsString.split(",");
-                    List<String> habitsInputList = Arrays.asList(habitsInputSplit);
-                    ArrayList<String> habitsList = new ArrayList<>(habitsInputList);
+                // Get the user-input
+                String goalName = goalsDropDownCopy.getValue();
+                String habitsInputAsString = habitsInput.getText().replaceAll("\\s", ""); // Remove all whitespace
+                String[] habitsInputSplit = habitsInputAsString.split(",");
+                List<String> habitsInputList = Arrays.asList(habitsInputSplit);
+                ArrayList<String> habitsList = new ArrayList<>(habitsInputList);
 
-                    // Input error handling
-                    // Handle if user clicks habits textfield, but doesn't enter anything
-                    if (habitsInputAsString.equals("") || habitsInputAsString.equals(" ")) {
-                        habitsList.clear(); //Make list empty
-                    }
-
-                    if (habitsList.isEmpty()) {
-                        updateStatus("Enter a valid list of habits and re-try", "red");
-                    }
-                    if (goalName == null) {
-                        updateStatus("Select a valid goal and re-try", "red");
-                    }
-
-                    // Send data to data.java
-                    data.addHabits(goalName, habitsList, 0);
-                    updateStatus("Habits added successfully!", "green");
-                    // Update habitsDropDown
-                    populateHabitsDropDown();
-
+                // Input error handling
+                // Handle if user clicks habits textfield, but doesn't enter anything
+                if (habitsInputAsString.equals("") || habitsInputAsString.equals(" ")) {
+                    habitsList.clear(); //Make list empty
                 }
-                return "";
+
+                if (habitsList.isEmpty()) {
+                    updateStatus("Enter a valid list of habits and re-try", "red");
+                }
+                if (goalName == null) {
+                    updateStatus("Select a valid goal and re-try", "red");
+                }
+
+                // Send data to data.java
+                data.addHabits(goalName, habitsList, 0);
+                updateStatus("Habits added successfully!", "green");
+                // Update habitsDropDown
+                populateHabitsDropDown();
+
+            }
+            return "";
         });
 
         dialog.show();
@@ -549,7 +554,7 @@ public class MainController {
                 String selectedValue = habitsDropDownCopy.getValue();
                 // Initialize goalname to map to habit
                 String goalName = null;
-                
+
                 if (selectedValue == null) {
                     updateStatus("Select a habit", "red");// Tell user to select a goal before clicking Delete button
                 } else {
@@ -564,7 +569,7 @@ public class MainController {
                             }
                         }
                     }
-                    
+
                     if (data.deleteHabitsFromGoal(goalName, selectedValue)) {
                         updateStatus("Habit deleted successfully", "green");
                         // Update habitsDropDown
@@ -611,10 +616,10 @@ public class MainController {
     @FXML
     private void increaseHabitCount() {
         // Check if habitsDropDown itself is not null
-//        if (habitsDropDown == null) {
-//            updateStatus("Habit dropdown is not initialized.", "red");
-//            return;
-//        }
+        if (habitsDropDown == null) {
+            updateStatus("Habit dropdown is not initialized.", "red");
+            return;
+        }
 
         String selectedHabitName = habitsDropDown.getValue();
         if (selectedHabitName == null || selectedHabitName.isEmpty()) {
@@ -703,9 +708,9 @@ public class MainController {
             updateStatus("Here is your Eisenhower Matrix","blue");
 
         } else {
-        alert.setHeaderText("Looks like you have can't created the matrix yet!");
-        alert.showAndWait();
-        updateStatus("Please create the Eisenhower Matrix","red");
+            alert.setHeaderText("Looks like you have can't created the matrix yet!");
+            alert.showAndWait();
+            updateStatus("Please create the Eisenhower Matrix","red");
         }
 
     }
@@ -742,7 +747,7 @@ public class MainController {
 
 
 
-    }
+}
 
 
 

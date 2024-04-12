@@ -15,6 +15,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
+import javax.management.StringValueExp;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.*;
@@ -493,8 +494,8 @@ public class MainController {
         String categoryChoice = myCategoryBox.getValue();
         String goalChoice = goalsDropDown.getValue();
         data.setCategory(categoryChoice, goalChoice);
-
-        statusLabel.setText("You have set goal: " + goalChoice + " into Category: " + categoryChoice);
+        String t = "Voila! You have set goal: " + goalChoice + " into Category: " + categoryChoice;
+        updateStatus(t, "blue");
     }
     /**
      * getMatrixChoice: the sets the matrix quadrant for the goal choice to the chosen quadrant using a method in data
@@ -505,10 +506,10 @@ public class MainController {
         String goalChoice2 = goalsDropDown.getValue();
 
         data.setMatrix(matrixChoice, goalChoice2);
-        statusLabel.setText("You have set goal: " + goalChoice2 + " into Quadrant: " + matrixChoice);
-
-
+        String s = "Hi, You have set goal: " + goalChoice2 + " into Quadrant: " + matrixChoice;
+        updateStatus(s,"blue");
     }
+
     /**
      * matrixShower: this uses an alert to show the current matrix;
      */
@@ -516,14 +517,34 @@ public class MainController {
     @FXML
     protected void showMatrix(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
         alert.setTitle("Goals in Eisenhower Matrix");
-        alert.setHeaderText("Here is your current Eisenhower Matrix");
+        if(data.matrix2.containsKey("Urgent and Important")){
+            alert.setHeaderText("Here is your current Eisenhower Matrix");
 
-        alert.setContentText(String.valueOf(data.matrix2));
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+            int row = 0;
+            for (Map.Entry<String, ArrayList<String>> entry :data.matrix2.entrySet()) {
+                Label keyLabel = new Label(entry.getKey() + ":");
+                String combinedValues = String.join(", ", entry.getValue());
+                Label valueLabel = new Label(combinedValues);
+                gridPane.add(keyLabel, 0, row);
+                gridPane.add(valueLabel, 1, row);
+                row++;
+            }
+            alert.getDialogPane().setContent(gridPane);
+
+            alert.showAndWait();
+            updateStatus("Here is your Eisenhower Matrix","blue");
+
+        } else {
+        alert.setHeaderText("Looks like you have can't created the matrix yet!");
         alert.showAndWait();
-
-
-
+        updateStatus("Please create the Eisenhower Matrix","red");
+        }
 
     }
 

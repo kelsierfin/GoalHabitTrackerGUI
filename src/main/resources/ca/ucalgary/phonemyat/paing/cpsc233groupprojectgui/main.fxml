@@ -27,10 +27,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Load" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Reset " />
+                        <MenuItem mnemonicParsing="false" onAction="#loadAction" text="Load" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveAction" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeAction" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#resetDataAction" text="Reset " />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -44,7 +44,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#aboutAction" text="About" />
                     </items>
                 </Menu>
             </menus>
@@ -86,7 +86,7 @@
                               <Font name="Consolas Italic" size="14.0" />
                            </font>
                         </Label>
-                            <Button layoutX="175.0" layoutY="507.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Increase Count" />
+                            <Button layoutX="175.0" layoutY="507.0" mnemonicParsing="false" onAction="#increaseHabitCount" prefHeight="25.0" prefWidth="117.0" text="Increase Count" />
                         <Label contentDisplay="CENTER" layoutX="14.0" layoutY="429.0" prefHeight="35.0" prefWidth="176.0" text="Count Management">
                            <font>
                               <Font name="Consolas Italic" size="14.0" />
@@ -107,7 +107,7 @@
                                 </FXCollections>
                             </items>
                         </ChoiceBox>
-                         <ChoiceBox layoutX="161.0" layoutY="464.0" prefHeight="38.0" prefWidth="146.0" />
+                         <ChoiceBox fx:id="habitsDropDown" layoutX="161.0" layoutY="464.0" prefHeight="38.0" prefWidth="146.0" />
                         <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="9.0" layoutY="334.0" prefHeight="35.0" prefWidth="144.0" text="Choose the location:" textAlignment="RIGHT">
                            <font>
                               <Font name="Consolas Italic" size="12.0" />

@@ -20,6 +20,7 @@ public class Data {
     protected static  ArrayList<Integer> choicesArrayList2; // choices for the goals for categorization in order of input.
 
     protected static HashSet<Goal> goals; // Hashset to contain all goal objects
+    protected static HashSet<Habit> habits;
     protected static HashMap<String, ArrayList<String>> matrix; // intializes the eisenhower matrix so that it can be changed anywhere in package
 
     protected static HashMap<String, ArrayList<String>> fields; // intializes the categorization matrix so that it can be changed anywhere in packag
@@ -136,15 +137,18 @@ public class Data {
         // place the object in a hashset (prevent duplicates)
         // Add the habit object to tracker, next to the goal
 
-        HashSet<Habit> allHabits = new HashSet<>();
+
 
         for (Goal goal : goals) {
             if (goal.getGoal().equals(goalName)) {
+                HashSet<Habit> allHabits = null;
                 for (String habitName : habitsList) {
+                    allHabits = tracker.getOrDefault(goal, new HashSet<>());
                     Habit individualHabit = new Habit(goal.getGoal(), goal.getIdealCount(), goal.getCategory(), currentCount, habitName);
                     allHabits.add(individualHabit);
                 }
                 // Add hashset to tracker
+
                 tracker.put(goal, allHabits);
             }
         }

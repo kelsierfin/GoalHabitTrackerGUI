@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class FileLoader {
     public static Data load(File file) {
         Data data = new Data();
-        ArrayList<String> habitsList = new ArrayList<>();
+
 
         try (Scanner scanner = new Scanner(file)) {
             String line = scanner.nextLine();
@@ -54,6 +54,7 @@ public class FileLoader {
                 String[] parts = line.split(",");
 
                 if (parts.length == 5) {
+                    ArrayList<String> habitsList = new ArrayList<>();
                     String goalName = parts[0];
                     int goalIdealCount = Integer.parseInt(parts[1]);
                     String goalCategory = parts[2];
@@ -64,6 +65,8 @@ public class FileLoader {
 
                     habitsList.add(habit.getHabit());
                     data.addHabits(goalName, habitsList, habitCurrentCount);
+                    System.out.println(habitsList);
+                    System.out.println(habitCurrentCount);
 
                 } else {
                     System.out.println("Not enough data!" + parts.length);

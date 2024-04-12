@@ -199,7 +199,10 @@ public class MainController {
             } else {
                 updateStatus("Failed to load data from file.", "red");
             }
+            // Update general tracker
+            setTrackerGeneralView();
         }
+
     }
 
 
@@ -233,6 +236,9 @@ public class MainController {
             // User chose cancel
             updateStatus("Resetting process cancelled.", "blue");
         }
+
+        // Update general tracker
+        setTrackerGeneralView();
     }
 
 

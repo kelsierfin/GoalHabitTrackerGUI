@@ -39,7 +39,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#menuDeleteAGoalAction" text="Delete a Goal" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#menuAddAHabitAction" text="Add Habits" />
-                        <MenuItem mnemonicParsing="false" text="Delete a Habit" />
+                        <MenuItem mnemonicParsing="false" text="Delete a Habit" onAction="#menuDeleteHabitsAction" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

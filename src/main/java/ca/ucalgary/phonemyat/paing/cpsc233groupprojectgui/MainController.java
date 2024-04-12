@@ -34,6 +34,10 @@ public class MainController {
     @FXML
     private ChoiceBox<String> goalsDropDown;
 
+
+    @FXML
+    private ChoiceBox<String> habitsDropDown;
+
     // Choices for the categories
     @FXML
     private ChoiceBox<String> myCategoryBox;
@@ -59,8 +63,6 @@ public class MainController {
         populateHabitsDropDown();
     }
 
-    @FXML
-    private ChoiceBox<String> habitsDropDown;
 
     /**
      * Populates the {@code habitsDropDown} {@code ChoiceBox} with the names of habits.
@@ -418,8 +420,11 @@ public class MainController {
         }
     }
 
-    /**
+    /** This method prompts the user to select a Goal and enter a list of habits for it.
+     * The user must enter habits separated by commas.
+     * The data input by the user is then processed in data.java
      *
+     * @author: Tania Rizwan
      */
     @FXML
     protected void menuAddAHabitAction() {
@@ -489,17 +494,82 @@ public class MainController {
 
         dialog.show();
 
+    }
 
+    /**
+     *
+     */
+    @FXML
+    protected void menuDeleteHabitsAction(){
+        // Open a dialog which presents the habits dropdown
+        // Have user select a habit to delete
+
+        // Create dialog
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Delete a Habit");
+        dialog.setHeaderText("Select the name of the habit to delete");
+
+
+        // Add buttons (Delete and Cancel)
+        ButtonType delete = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(delete, cancel);
+        // Get the ButtonBar and configure button order
+        ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
+        buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
+
+        // Create a copy of habitsDropDown
+        ChoiceBox<String> habitsDropDownCopy = new ChoiceBox<>();
+        habitsDropDownCopy.setItems(habitsDropDown.getItems());
+        habitsDropDownCopy.setValue(habitsDropDown.getValue());
+
+
+        // Create a VBox so we can store the dropdown with padding around
+        VBox container = new VBox(10);
+        container.setAlignment(Pos.CENTER);
+        container.getChildren().add(habitsDropDownCopy); // Add dropdown to the vbox
+        dialog.getDialogPane().setContent(container); // Add container to dialog
+
+
+        // Use ResultConverter to get result when Delete/Cancel button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == delete) {
+
+                // Get the name of the habit from dropdown
+                String selectedValue = habitsDropDownCopy.getValue();
+                // Initialize goalname to map to habit
+                String goalName = null;
+                
+                if (selectedValue == null) {
+                    updateStatus("Select a habit", "red");// Tell user to select a goal before clicking Delete button
+                } else {
+                    // Find the habit object
+                    for (Map.Entry<Goal, HashSet<Habit>> e : data.tracker.entrySet()) {
+                        HashSet<Habit> set = e.getValue(); // Get the habits hashset
+
+                        for (Habit habit : set) {
+                            if (habit.getHabit().equals(selectedValue)) { // If the hashset contains our selected Habit
+                                goalName = e.getKey().getGoal(); // Get goal name
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (data.deleteHabitsFromGoal(goalName, selectedValue)) {
+                        updateStatus("Habit deleted successfully", "green");
+                        // Update habitsDropDown
+                        populateHabitsDropDown();
+                    } else {
+                        updateStatus("Error deleting Habit", "Red");
+                    }
+                }
+
+                return goalsDropDown.getValue();
+            }
+            return null; // Return null if cancel option is clicked
+        });
 
         dialog.show();
-
-
-
-
-
-
-
-
     }
 
 

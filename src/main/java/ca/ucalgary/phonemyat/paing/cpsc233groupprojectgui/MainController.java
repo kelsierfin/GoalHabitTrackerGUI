@@ -201,6 +201,8 @@ public class MainController {
             }
             // Update general tracker
             setTrackerGeneralView();
+            // Update habitsGeneralView
+            setHabitsGeneralView();
         }
 
     }
@@ -234,11 +236,13 @@ public class MainController {
             }
         } else {
             // User chose cancel
-            updateStatus("Resetting process cancelled.", "blue");
+            updateStatus("Resetting process cancelled.", "red");
         }
 
         // Update general tracker
         setTrackerGeneralView();
+        // Update habitsGeneralView
+        setHabitsGeneralView();
     }
 
 
@@ -282,6 +286,9 @@ public class MainController {
 
         if (habitsDropDown != null) {
             habitsDropDown.getItems().clear();
+            for (Map.Entry<Goal, HashSet<Habit>> e: tracker.entrySet()) {
+                e.getValue().clear();
+            }
         }
 
         generalOverviewPane.getChildren().clear();
@@ -359,6 +366,8 @@ public class MainController {
                             updateStatus("Goal added successfully!", "green");
                             setGoalsDropDown();
                             setTrackerGeneralView();
+                            // Update habitsGeneralView
+                            setHabitsGeneralView();
                         }
                     } else {
                         throw new NullPointerException();
@@ -425,6 +434,8 @@ public class MainController {
                         setGoalsDropDown();
                         // Update general tracker
                         setTrackerGeneralView();
+                        // Update habitsGeneralView
+                        setHabitsGeneralView();
                     } else {
                         updateStatus("Error deleting goal", "red");
                     }
@@ -501,7 +512,7 @@ public class MainController {
 
                 // Get the user-input
                 String goalName = goalsDropDownCopy.getValue();
-                String habitsInputAsString = habitsInput.getText().replaceAll("\\s", ""); // Remove all whitespace
+                String habitsInputAsString = habitsInput.getText().trim(); // Remove all whitespace (leading/trailing)
                 String[] habitsInputSplit = habitsInputAsString.split(",");
                 List<String> habitsInputList = Arrays.asList(habitsInputSplit);
                 ArrayList<String> habitsList = new ArrayList<>(habitsInputList);
@@ -524,6 +535,8 @@ public class MainController {
                 updateStatus("Habits added successfully!", "green");
                 // Update habitsDropDown
                 populateHabitsDropDown();
+                // Update habitsGeneralView
+                setHabitsGeneralView();
 
             }
             return "";
@@ -596,6 +609,8 @@ public class MainController {
                         updateStatus("Habit deleted successfully", "green");
                         // Update habitsDropDown
                         populateHabitsDropDown();
+                        // Update habitsGeneralView
+                        setHabitsGeneralView();
                     } else {
                         updateStatus("Error deleting Habit", "Red");
                     }
@@ -658,6 +673,8 @@ public class MainController {
 
         habit.incrementCurrentCount();
         updateStatus("Habit '" + selectedHabitName + "' count increased to " + habit.getCurrentCount() + ".", "green");
+        // Update habitsGeneralView
+        setHabitsGeneralView();
     }
 
     public Habit findHabitByName(String habitName) {
@@ -690,7 +707,7 @@ public class MainController {
         Optional<ButtonType> result = confirmAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Calculate and display completion rates
-            Map<String, Double> completionRates = Data.calculateWeeklyCompletionRates();
+            Map<String, Double> completionRates = calculateWeeklyCompletionRates();
             StringBuilder contentText = new StringBuilder();
             completionRates.forEach((habit, rate) ->
                     contentText.append(String.format("Habit: %s, Completion Rate: %.0f%%\n", habit, rate)));
@@ -703,13 +720,13 @@ public class MainController {
             ratesAlert.showAndWait();
         } else {
             // Handle cancellation
-            updateStatus("Viewing weekly completion rates cancelled.", "blue");
+            updateStatus("Viewing weekly completion rates cancelled.", "red");
         }
     }
 
     @FXML
     private void viewTop3HabitsAction() {
-        List<Habit> topHabits = Data.getTop3HabitsByCompletionRate();
+        List<Habit> topHabits = getTop3HabitsByCompletionRate();
 
         if (topHabits.isEmpty()) {
             updateStatus("No habit in the database.", "red");
@@ -749,10 +766,12 @@ public class MainController {
         String goalChoice = goalsDropDown.getValue();
         data.setCategory(categoryChoice, goalChoice);
         String t = "Voila! You have set goal: " + goalChoice + " into Category: " + categoryChoice;
-        updateStatus(t, "blue");
+        updateStatus(t, "green");
 
         // Update general tracker
         setTrackerGeneralView();
+        // Update habitsGeneralView
+        setHabitsGeneralView();
     }
 
     /**
@@ -766,7 +785,7 @@ public class MainController {
 
         data.setMatrix(matrixChoice, goalChoice2);
         String s = "Hi, You have set goal: " + goalChoice2 + " into Quadrant: " + matrixChoice;
-        updateStatus(s, "blue");
+        updateStatus(s, "green");
     }
 
     /**
@@ -798,7 +817,7 @@ public class MainController {
             alert.getDialogPane().setContent(gridPane);
 
             alert.showAndWait();
-            updateStatus("Here is your Eisenhower Matrix", "blue");
+            updateStatus("Here is your Eisenhower Matrix", "green");
 
         } else {
             alert.setHeaderText("Looks like you have can't created the matrix yet!");
@@ -864,7 +883,69 @@ public class MainController {
             generalOverviewPane.add(idealCount, 2, i);
 
         }
+    }
 
+    @FXML
+    protected void setHabitsGeneralView() {
+        // Clear grid
+        habitsOverviewPane.getChildren().clear();
+        habitsOverviewPane.getColumnConstraints().clear();
+        habitsOverviewPane.getRowConstraints().clear();
+        habitsOverviewPane.setGridLinesVisible(false);
+
+        // Define rows and cols
+        Integer rows = habitsDropDown.getItems().size(); // Number of goals defines rows
+        Integer cols = 4; // Fixed
+
+        // Set constraints
+        for (int i = 0; i < rows; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setValignment(VPos.CENTER);
+            rowConstraints.setVgrow(Priority.ALWAYS);
+            habitsOverviewPane.getRowConstraints().add(rowConstraints);
+        }
+
+        for (int i = 0; i < cols; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setHalignment(HPos.CENTER);
+            columnConstraints.setHgrow(Priority.NEVER);
+            columnConstraints.setPrefWidth(200);
+            columnConstraints.setMaxWidth(200);
+            habitsOverviewPane.getColumnConstraints().add(columnConstraints);
+        }
+
+        // Set-up fields for grid
+        ArrayList<Habit> habits = new ArrayList<>();
+        ArrayList<Goal> goals = new ArrayList<>();
+        for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
+            // Access habits hashset for specific goal
+            HashSet<Habit> habitsSet = e.getValue();
+            habits.addAll(habitsSet); // Add all habits to arraylist
+            goals.add(e.getKey());
+        }
+
+        // Set-up the grid
+        for (int i = 0; i < rows; i++) {
+
+//            ArrayList<Habit> habits = new ArrayList<>();
+//            for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
+//                // Access habits hashset for specific goal
+//                HashSet<Habit> habitsSet = e.getValue();
+//                habits.addAll(habitsSet); // Add all habits to arraylist
+//            }
+
+
+            Habit habit = (Habit) habits.get(i);
+            Label habitName = new Label(habit.getHabit());
+            Label goalName = new Label(habit.getGoal());
+            Label category = new Label(habit.getCategory());
+            Label currentCount = new Label(String.valueOf(habit.getCurrentCount()));
+
+            habitsOverviewPane.add(goalName, 0, i);
+            habitsOverviewPane.add(habitName, 1, i);
+            habitsOverviewPane.add(category, 2, i);
+            habitsOverviewPane.add(currentCount, 3, i);
+        }
     }
 
     /**

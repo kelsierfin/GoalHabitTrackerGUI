@@ -207,7 +207,7 @@
                                     <Label alignment="CENTER" prefHeight="53.0" prefWidth="247.0" text="Current Count" textAlignment="CENTER" />
                                  </children>
                               </HBox>
-                              <GridPane layoutX="2.0" layoutY="104.0" prefHeight="163.0" prefWidth="852.0">
+                              <GridPane layoutX="2.0" layoutY="104.0" prefHeight="163.0" prefWidth="852.0" fx:id="habitsOverviewPane">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

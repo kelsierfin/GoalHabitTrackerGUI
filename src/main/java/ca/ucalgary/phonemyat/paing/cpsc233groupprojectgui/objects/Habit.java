@@ -8,6 +8,7 @@ public class Habit extends Goal{
 
     private String habitName;
     private Integer currentCount;
+    private Goal associatedGoal;
 
 
     public Habit(String goal, Integer idealCount, String category, Integer currentCount,String habitName){
@@ -21,6 +22,7 @@ public class Habit extends Goal{
     public String getHabit() {
         return habitName;
     }
+
 
     public void setHabit(String habit) {
         this.habitName = habit;

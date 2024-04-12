@@ -664,6 +664,7 @@ public class MainController {
 
     /**
      * getCategoryChoice: the sets the category for the goal choice to the chosen category using a method in data
+     * @author: Sanbeer
      */
     @FXML
     protected void getCategoryChoice() {
@@ -679,6 +680,7 @@ public class MainController {
 
     /**
      * getMatrixChoice: the sets the matrix quadrant for the goal choice to the chosen quadrant using a method in data
+     * @author: Sanbeer
      */
     @FXML
     protected void getMatrixChoice() {
@@ -692,6 +694,7 @@ public class MainController {
 
     /**
      * matrixShower: this uses an alert to show the current matrix;
+     * @author: Sanbeer
      */
 
     @FXML
@@ -816,16 +819,20 @@ public class MainController {
         barChart.getData().add(series);
 
         // Create an alert
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Visualized Habit Progression");
-        alert.setHeaderText("Your Current Habit Progression");
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Dialog<BarChart> dialog = new Dialog();
+        dialog.getDialogPane().setContent(barChart);
+        dialog.showAndWait();
+
+//        alert.setTitle("Visualized Habit Progression");
+//        alert.setHeaderText("Your Current Habit Progression");
 
         // Set the bar chart as the content of the alert
 
-        alert.getDialogPane().setContent(barChart);
+//        alert.getDialogPane().setContent(barChart);
 
         // Display the alert
-        alert.showAndWait();
+//        alert.showAndWait();
 
     }
 

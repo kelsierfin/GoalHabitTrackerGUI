@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="GroupProjectGUI">
+    <output-path>$PROJECT_DIR$/out/artifacts/GroupProjectGUI</output-path>
+    <root id="archive" name="GroupProjectGUI.jar">
+      <element id="module-output" name="CPSC233GroupProjectGUI" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

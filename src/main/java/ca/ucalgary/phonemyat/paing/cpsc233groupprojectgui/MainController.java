@@ -72,6 +72,12 @@ public class MainController {
      * @author: Phone Myat Paing
      */
     private void populateHabitsDropDown() {
+        // First, clear the dropdown to avoid duplicating data
+        if (habitsDropDown != null) {
+            habitsDropDown.getItems().clear();
+
+        }
+
         // Iterate over all sets of habits in the tracker
         Data.getTracker().values().forEach(habitsSet ->
                 // Add each habit's name to the habitsDropDown ChoiceBox

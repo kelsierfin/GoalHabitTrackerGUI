@@ -164,7 +164,6 @@
                                     <Label alignment="CENTER" prefHeight="80.0" prefWidth="201.0" text="Goal Name " textAlignment="CENTER" />
                                     <Label alignment="CENTER" prefHeight="80.0" prefWidth="200.0" text="Category" textAlignment="CENTER" />
                                     <Label alignment="CENTER" prefHeight="79.0" prefWidth="248.0" text="Ideal Count" textAlignment="CENTER" />
-                                    <Label alignment="CENTER" prefHeight="76.0" prefWidth="236.0" text="Total Points" textAlignment="CENTER" />
                                  </children>
                               </HBox>
                               <GridPane fx:id="generalOverviewPane" layoutX="4.0" layoutY="100.0" prefHeight="457.0" prefWidth="852.0">

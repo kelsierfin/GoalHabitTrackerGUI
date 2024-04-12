@@ -294,6 +294,9 @@ public class Data {
 
                 // Store the calculated rate in the map with the habit's name as the key.
                 rates.put(habit.getHabit(), rate);
+
+                System.out.printf("Habit: %s, Ideal Count: %d, Current Count: %d, Completion Rate: %.2f%%\n",
+                        habit.getHabit(), habit.getIdealCount(), habit.getCurrentCount(), rate);
             }
         }
 
@@ -596,7 +599,9 @@ public class Data {
 
     }
 
+    public void addHabits(String key, ArrayList<Habit> value) {
     }
+}
 
 
 

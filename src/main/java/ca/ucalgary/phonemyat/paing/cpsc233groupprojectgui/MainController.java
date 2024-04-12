@@ -283,6 +283,12 @@ public class MainController {
         if (habitsDropDown != null) {
             habitsDropDown.getItems().clear();
         }
+
+        generalOverviewPane.getChildren().clear();
+        generalOverviewPane.getColumnConstraints().clear();
+        generalOverviewPane.getRowConstraints().clear();
+        generalOverviewPane.setGridLinesVisible(false);
+
     }
 
 
@@ -699,6 +705,37 @@ public class MainController {
             // Handle cancellation
             updateStatus("Viewing weekly completion rates cancelled.", "blue");
         }
+    }
+
+    @FXML
+    private void viewTop3HabitsAction() {
+        List<Habit> topHabits = Data.getTop3HabitsByCompletionRate();
+
+        if (topHabits.isEmpty()) {
+            updateStatus("No habit in the database.", "red");
+            return; // Exit if no habits are found
+        }
+
+        StringBuilder contentText = new StringBuilder();
+        // Determine the message based on the number of habits retrieved
+        if (topHabits.size() >= 3) {
+            contentText.append("Top 3 habits for this week are: \n");
+        } else {
+            contentText.append("Mostly done habits are: \n");
+        }
+
+        // Construct a message listing the habits and their completion rates
+        for (int i = 0; i < topHabits.size(); i++) {
+            Habit habit = topHabits.get(i);
+            contentText.append(String.format("%s (%.2f%% complete)\n", habit.getHabit(), habit.getWeeklyCompletionRate()));
+        }
+
+        // Show the completion rates in an alert dialog
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Top 3 Habits");
+        alert.setHeaderText("Weekly Completion Rates");
+        alert.setContentText(contentText.toString());
+        alert.showAndWait();
     }
 
 

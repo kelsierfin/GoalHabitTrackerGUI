@@ -66,7 +66,6 @@ public class MainController {
      */
     @FXML
     public void initialize() {
-        populateHabitsDropDown();
     }
 
 
@@ -79,19 +78,21 @@ public class MainController {
      */
     private void populateHabitsDropDown() {
         // First, clear the dropdown to avoid duplicating data
-        if (habitsDropDown != null) {
-            habitsDropDown.getItems().clear();
+        habitsDropDown.getItems().clear();
 
-        }
+        // Create a set to hold all unique habits
+        Set<String> uniqueHabits = new HashSet<>();
 
         // Iterate over all sets of habits in the tracker
-        Data.getTracker().values().forEach(habitsSet ->
-                // Add each habit's name to the habitsDropDown ChoiceBox
-                habitsSet.forEach(habit -> {
-                    habitsDropDown.getItems().add(habit.getHabit());
-                })
+        data.getTracker().values().forEach(habitsSet ->
+                // Add each unique habit's name to the set
+                habitsSet.forEach(habit -> uniqueHabits.add(habit.getHabit()))
         );
+
+        // Add all unique habits to the habitsDropDown ChoiceBox
+        habitsDropDown.getItems().addAll(uniqueHabits);
     }
+
     /**
      * Update the status label with specified message and color.
      *

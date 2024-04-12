@@ -136,6 +136,7 @@
                      <children>
                         <Button fx:id="top3button" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="205.0" text="View Top 3 Habits" />
                         <Button fx:id="weekly" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="203.0" text="View the Weekly Completion" />
+                        <Button fx:id="habitBar" layoutX="60.0" layoutY="150.0" mnemonicParsing="false" onAction="#showHabitBar" prefHeight="30.0" prefWidth="205.0" text="Visualize Habit Progress" />
                         <Button layoutX="60.0" layoutY="150.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" text="Visualize Habit Progress" fx:id="habitBar"  onAction="#showHabitBar"/>
                         <Button fx:id="matrixShower" layoutX="62.0" layoutY="194.0" mnemonicParsing="false" onAction="#showMatrix" prefHeight="30.0" prefWidth="203.0" text="View Eishenhower Matrix" />
                         <Label layoutX="76.0" layoutY="24.0" text="Statistics and Views">

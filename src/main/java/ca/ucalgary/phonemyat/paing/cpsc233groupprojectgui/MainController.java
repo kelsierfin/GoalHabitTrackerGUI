@@ -742,7 +742,7 @@ public class MainController {
         generalOverviewPane.getChildren().clear();
         generalOverviewPane.getColumnConstraints().clear();
         generalOverviewPane.getRowConstraints().clear();
-        generalOverviewPane.setGridLinesVisible(true);
+        generalOverviewPane.setGridLinesVisible(false);
 
         // Define rows and cols
         Integer rows = goalsDropDown.getItems().size(); // Number of goals defines rows

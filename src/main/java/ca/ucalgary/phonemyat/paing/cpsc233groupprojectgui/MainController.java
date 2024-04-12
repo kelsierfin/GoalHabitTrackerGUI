@@ -25,6 +25,13 @@ import java.util.*;
 
 import static ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.Data.*;
 
+/**
+ * This class provides the controller which connects the Habit Tracker to the GUI
+ *
+ * @authors Phone, Sanbeer, Tania
+ * @tutorial T14, T09, T10
+ */
+
 public class MainController {
 
     // Data obj

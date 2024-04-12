@@ -137,8 +137,6 @@ public class Data {
         // place the object in a hashset (prevent duplicates)
         // Add the habit object to tracker, next to the goal
 
-
-
         for (Goal goal : goals) {
             if (goal.getGoal().equals(goalName)) {
                 HashSet<Habit> allHabits = null;

@@ -53,100 +53,100 @@
     <left>
         <AnchorPane prefHeight="782.0" prefWidth="319.0" BorderPane.alignment="CENTER">
             <children>
-            <SplitPane dividerPositions="0.6693735498839907" layoutX="-2.0" layoutY="3.0" orientation="VERTICAL" prefHeight="864.0" prefWidth="325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <items>
-                <AnchorPane prefHeight="578.0" prefWidth="317.0">
-                     <children>
-                            <ChoiceBox fx:id="goalsDropDown" layoutX="162.0" layoutY="88.0" prefHeight="35.0" prefWidth="143.0" />
-                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="10.0" prefHeight="38.0" prefWidth="163.0" text=" Operations Menu">
-                           <font>
-                              <Font name="Consolas Bold" size="16.0" />
-                           </font>
-                        </Label>
-                            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="5.0" layoutY="83.0" prefHeight="35.0" prefWidth="152.0" text="Choose a goal here:" textAlignment="RIGHT">
-                                <font>
-                                    <Font name="Consolas Italic" size="12.0" />
-                                </font>
-                            </Label>
-                            <ChoiceBox fx:id="myCategoryBox" layoutX="162.0" layoutY="181.0" prefHeight="36.0" prefWidth="143.0">
-                                <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                        <String fx:value="Finance" />
-                                        <String fx:value="Work" />
-                                        <String fx:value="School" />
-                                        <String fx:value="Emotional" />
-                                        <String fx:value="Spiritual" />
-                                        <String fx:value="Social" />
-                                    </FXCollections>
-                                </items>
-                            </ChoiceBox>
+                <SplitPane dividerPositions="0.6693735498839907" layoutX="-2.0" layoutY="3.0" orientation="VERTICAL" prefHeight="864.0" prefWidth="325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane prefHeight="578.0" prefWidth="317.0">
+                            <children>
+                                <ChoiceBox fx:id="goalsDropDown" layoutX="162.0" layoutY="88.0" prefHeight="35.0" prefWidth="143.0" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="10.0" prefHeight="38.0" prefWidth="163.0" text=" Operations Menu">
+                                    <font>
+                                        <Font name="Consolas Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="5.0" layoutY="83.0" prefHeight="35.0" prefWidth="152.0" text="Choose a goal here:" textAlignment="RIGHT">
+                                    <font>
+                                        <Font name="Consolas Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="myCategoryBox" layoutX="162.0" layoutY="181.0" prefHeight="36.0" prefWidth="143.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Finance" />
+                                            <String fx:value="Work" />
+                                            <String fx:value="School" />
+                                            <String fx:value="Emotional" />
+                                            <String fx:value="Spiritual" />
+                                            <String fx:value="Social" />
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
 
-                         <Label contentDisplay="CENTER" layoutX="14.0" layoutY="48.0" prefHeight="35.0" prefWidth="176.0" text="Category Management">
-                           <font>
-                              <Font name="Consolas Italic" size="14.0" />
-                           </font>
-                        </Label>
-                            <Button layoutX="175.0" layoutY="507.0" mnemonicParsing="false" onAction="#increaseHabitCount" prefHeight="25.0" prefWidth="117.0" text="Increase Count" />
-                        <Label contentDisplay="CENTER" layoutX="14.0" layoutY="429.0" prefHeight="35.0" prefWidth="176.0" text="Count Management">
-                           <font>
-                              <Font name="Consolas Italic" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="9.0" layoutY="466.0" prefHeight="35.0" prefWidth="144.0" text="Choose a habit here:" textAlignment="RIGHT">
-                           <font>
-                              <Font name="Consolas Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox fx:id="myMatrixBox" layoutX="161.0" layoutY="332.0" prefHeight="38.0" prefWidth="146.0">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Urgent and Important" />
-                                    <String fx:value="Urgent and Not Important" />
-                                    <String fx:value="Important and Not Urgent" />
-                                    <String fx:value="Not Important and Not Urgent" />
-                                </FXCollections>
-                            </items>
-                        </ChoiceBox>
-                         <ChoiceBox fx:id="habitsDropDown" layoutX="161.0" layoutY="464.0" prefHeight="38.0" prefWidth="146.0" />
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="9.0" layoutY="334.0" prefHeight="35.0" prefWidth="144.0" text="Choose the location:" textAlignment="RIGHT">
-                           <font>
-                              <Font name="Consolas Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="15.0" layoutY="182.0" prefHeight="35.0" prefWidth="144.0" text="Choose the category:" textAlignment="RIGHT">
-                           <font>
-                              <Font name="Consolas Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="categoryButton" layoutX="171.0" layoutY="229.0" mnemonicParsing="false" onAction="#getCategoryChoice" prefHeight="25.0" prefWidth="116.0" text="Get Categorized" />
-                        <Button fx:id="matrixButton" layoutX="170.0" layoutY="377.0" mnemonicParsing="false" onAction="#getMatrixChoice" prefHeight="25.0" prefWidth="119.0" text="Get Matrixed" />
-                        <Label contentDisplay="CENTER" layoutX="15.0" layoutY="147.0" prefHeight="35.0" prefWidth="152.0" text="Categorize Goal">
-                           <font>
-                              <Font name="Consolas Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label contentDisplay="CENTER" layoutX="11.0" layoutY="291.0" prefHeight="35.0" prefWidth="192.0" text="Create EisenHower Matrix" textAlignment="RIGHT">
-                           <font>
-                              <Font name="Consolas Italic" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="317.0">
-                     <children>
-                        <Button fx:id="top3button" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="205.0" text="View Top 3 Habits" />
-                        <Button fx:id="weekly" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="203.0" text="View the Weekly Completion" />
-                        <Button fx:id="habitBar" layoutX="60.0" layoutY="150.0" mnemonicParsing="false" onAction="#showHabitBar" prefHeight="30.0" prefWidth="205.0" text="Visualize Habit Progress" />
-                        <Button fx:id="matrixShower" layoutX="62.0" layoutY="194.0" mnemonicParsing="false" onAction="#showMatrix" prefHeight="30.0" prefWidth="203.0" text="View Eishenhower Matrix" />
-                        <Label layoutX="76.0" layoutY="24.0" text="Statistics and Views">
-                           <font>
-                              <Font name="Consolas Bold" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
+                                <Label contentDisplay="CENTER" layoutX="14.0" layoutY="48.0" prefHeight="35.0" prefWidth="176.0" text="Category Management">
+                                    <font>
+                                        <Font name="Consolas Italic" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Button layoutX="175.0" layoutY="507.0" mnemonicParsing="false" onAction="#increaseHabitCount" prefHeight="25.0" prefWidth="117.0" text="Increase Count" />
+                                <Label contentDisplay="CENTER" layoutX="14.0" layoutY="429.0" prefHeight="35.0" prefWidth="176.0" text="Count Management">
+                                    <font>
+                                        <Font name="Consolas Italic" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="9.0" layoutY="466.0" prefHeight="35.0" prefWidth="144.0" text="Choose a habit here:" textAlignment="RIGHT">
+                                    <font>
+                                        <Font name="Consolas Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="myMatrixBox" layoutX="161.0" layoutY="332.0" prefHeight="38.0" prefWidth="146.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Urgent and Important" />
+                                            <String fx:value="Urgent and Not Important" />
+                                            <String fx:value="Important and Not Urgent" />
+                                            <String fx:value="Not Important and Not Urgent" />
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                                <ChoiceBox fx:id="habitsDropDown" layoutX="161.0" layoutY="464.0" prefHeight="38.0" prefWidth="146.0" />
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="9.0" layoutY="334.0" prefHeight="35.0" prefWidth="144.0" text="Choose the location:" textAlignment="RIGHT">
+                                    <font>
+                                        <Font name="Consolas Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="15.0" layoutY="182.0" prefHeight="35.0" prefWidth="144.0" text="Choose the category:" textAlignment="RIGHT">
+                                    <font>
+                                        <Font name="Consolas Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="categoryButton" layoutX="171.0" layoutY="229.0" mnemonicParsing="false" onAction="#getCategoryChoice" prefHeight="25.0" prefWidth="116.0" text="Get Categorized" />
+                                <Button fx:id="matrixButton" layoutX="170.0" layoutY="377.0" mnemonicParsing="false" onAction="#getMatrixChoice" prefHeight="25.0" prefWidth="119.0" text="Get Matrixed" />
+                                <Label contentDisplay="CENTER" layoutX="15.0" layoutY="147.0" prefHeight="35.0" prefWidth="152.0" text="Categorize Goal">
+                                    <font>
+                                        <Font name="Consolas Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label contentDisplay="CENTER" layoutX="11.0" layoutY="291.0" prefHeight="35.0" prefWidth="192.0" text="Create EisenHower Matrix" textAlignment="RIGHT">
+                                    <font>
+                                        <Font name="Consolas Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="317.0">
+                            <children>
+                                <Button fx:id="top3button" layoutX="61.0" layoutY="61.0" mnemonicParsing="false" onAction="#viewTop3HabitsAction" prefHeight="29.0" prefWidth="205.0" text="View Top 3 Habits" />
+                                <Button fx:id="weekly" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" onAction="#viewWeeklyCompletionAction" prefHeight="29.0" prefWidth="203.0" text="View the Weekly Completion" />
+                                <Button fx:id="habitBar" layoutX="60.0" layoutY="150.0" mnemonicParsing="false" onAction="#showHabitBar" prefHeight="30.0" prefWidth="205.0" text="Visualize Habit Progress" />
+                                <Button fx:id="matrixShower" layoutX="62.0" layoutY="194.0" mnemonicParsing="false" onAction="#showMatrix" prefHeight="30.0" prefWidth="203.0" text="View Eishenhower Matrix" />
+                                <Label layoutX="76.0" layoutY="24.0" text="Statistics and Views">
+                                    <font>
+                                        <Font name="Consolas Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
             </children>
         </AnchorPane>
     </left>
@@ -154,79 +154,79 @@
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" BorderPane.alignment="CENTER">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="870.0">
-               <children>
-                  <ScrollPane layoutX="179.0" layoutY="57.0" prefHeight="596.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <content>
-                      <AnchorPane prefHeight="573.0" prefWidth="872.0">
-                           <children>
-                               <HBox alignment="CENTER" layoutX="4.0" layoutY="48.0" prefHeight="43.0" prefWidth="854.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="48.0">
-                                   <children>
-                                       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="201.0" text="Goal Name " textAlignment="CENTER" />
-                                       <Label alignment="CENTER" prefHeight="80.0" prefWidth="200.0" text="Category" textAlignment="CENTER" />
-                                       <Label alignment="CENTER" prefHeight="79.0" prefWidth="248.0" text="Ideal Count" textAlignment="CENTER" />
-                                   </children>
-                               </HBox>
-                               <GridPane fx:id="generalOverviewPane" alignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
-                                   <columnConstraints>
-                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                   </columnConstraints>
-                                   <rowConstraints>
-                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                   </rowConstraints>
-                               </GridPane>
+                    <children>
+                        <ScrollPane layoutX="179.0" layoutY="57.0" prefHeight="596.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane prefHeight="573.0" prefWidth="872.0">
+                                    <children>
+                                        <HBox alignment="CENTER" layoutX="4.0" layoutY="48.0" prefHeight="43.0" prefWidth="854.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="48.0">
+                                            <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="201.0" text="Goal Name " textAlignment="CENTER" />
+                                                <Label alignment="CENTER" prefHeight="80.0" prefWidth="200.0" text="Category" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" prefHeight="79.0" prefWidth="248.0" text="Ideal Count" textAlignment="CENTER" />
+                                            </children>
+                                        </HBox>
+                                        <GridPane fx:id="generalOverviewPane" alignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                        </GridPane>
 
-            
-                                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="282.0" layoutY="16.0" prefHeight="20.0" prefWidth="297.0" text="General Overview" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
-                                       <font>
-                                           <Font name="Cambria" size="15.0" />
-                                       </font>
-                                   </Label>
-                               
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </ScrollPane>
-               </children></AnchorPane>
+
+                                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="282.0" layoutY="16.0" prefHeight="20.0" prefWidth="297.0" text="General Overview" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
+                                            <font>
+                                                <Font name="Cambria" size="15.0" />
+                                            </font>
+                                        </Label>
+
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
+                    </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="870.0">
                     <children>
-                  <ScrollPane layoutY="-7.0" prefHeight="260.0" prefWidth="870.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-7.0">
-                    <content>
-                      <AnchorPane prefHeight="282.0" prefWidth="882.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="856.0" text="Habit Overview" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
-                                 <font>
-                                    <Font name="Cambria" size="14.0" />
-                                 </font>
-                              </Label>
-                              <HBox layoutX="-1.0" layoutY="40.0" prefHeight="53.0" prefWidth="857.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="85.0" prefWidth="185.0" text="Goal Name " textAlignment="CENTER" />
-                                    <Label alignment="CENTER" prefHeight="53.0" prefWidth="219.0" text="Habit Name" textAlignment="CENTER" />
-                                    <Label alignment="CENTER" prefHeight="53.0" prefWidth="262.0" text="Category" textAlignment="CENTER" />
-                                    <Label alignment="CENTER" prefHeight="53.0" prefWidth="247.0" text="Current Count" textAlignment="CENTER" />
-                                 </children>
-                              </HBox>
-                              <GridPane fx:id="habitsOverviewPane" layoutX="2.0" layoutY="104.0" prefHeight="163.0" prefWidth="852.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </ScrollPane>
+                        <ScrollPane layoutY="-7.0" prefHeight="260.0" prefWidth="870.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-7.0">
+                            <content>
+                                <AnchorPane prefHeight="282.0" prefWidth="882.0">
+                                    <children>
+                                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="856.0" text="Habit Overview" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
+                                            <font>
+                                                <Font name="Cambria" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <HBox layoutX="-1.0" layoutY="40.0" prefHeight="53.0" prefWidth="857.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                                            <children>
+                                                <Label alignment="CENTER" prefHeight="85.0" prefWidth="185.0" text="Goal Name " textAlignment="CENTER" />
+                                                <Label alignment="CENTER" prefHeight="53.0" prefWidth="219.0" text="Habit Name" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" prefHeight="53.0" prefWidth="262.0" text="Category" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" prefHeight="53.0" prefWidth="247.0" text="Current Count" textAlignment="CENTER" />
+                                            </children>
+                                        </HBox>
+                                        <GridPane fx:id="habitsOverviewPane" layoutX="2.0" layoutY="104.0" prefHeight="163.0" prefWidth="852.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
                     </children>
                 </AnchorPane>
             </items>
@@ -234,18 +234,18 @@
     </center>
     <bottom>
         <HBox alignment="CENTER" prefHeight="27.0" prefWidth="1119.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="27.0" prefWidth="463.0">
-               <HBox.margin>
-                  <Insets left="50.0" />
-               </HBox.margin>
-            </Pane>
-            <Label fx:id="statusLabel" text=" " />
-            <Pane prefHeight="27.0" prefWidth="390.0">
-               <HBox.margin>
-                  <Insets right="50.0" />
-               </HBox.margin>
-            </Pane>
-         </children></HBox>
+            <children>
+                <Pane prefHeight="27.0" prefWidth="463.0">
+                    <HBox.margin>
+                        <Insets left="50.0" />
+                    </HBox.margin>
+                </Pane>
+                <Label fx:id="statusLabel" maxWidth="1000.0" minWidth="800.0" text=" " />
+                <Pane prefHeight="27.0" prefWidth="390.0">
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                </Pane>
+            </children></HBox>
     </bottom>
 </BorderPane>

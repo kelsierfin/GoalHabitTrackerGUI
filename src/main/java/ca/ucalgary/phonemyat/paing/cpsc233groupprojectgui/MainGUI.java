@@ -11,6 +11,8 @@ import java.io.IOException;
  * This class launches the Habit Tracker GUI.
  *
  * @authors Phone, Sanbeer, Tania
+ * @tutorial T14, T09, T10
+ * Emails: tania.rizwan@ucalgary.ca, sanbeer.shafin@ucalgary.ca, phonemyat.paing@ucalgary.ca
  */
 
 public class MainGUI extends Application {

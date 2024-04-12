@@ -30,6 +30,7 @@ import static ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.Data.*;
  *
  * @authors Phone, Sanbeer, Tania
  * @tutorial T14, T09, T10
+ * Emails: tania.rizwan@ucalgary.ca, sanbeer.shafin@ucalgary.ca, phonemyat.paing@ucalgary.ca
  */
 
 public class MainController {
@@ -741,6 +742,7 @@ public class MainController {
             ratesAlert.setTitle("Weekly Completion Rates");
             ratesAlert.setHeaderText("Here are your weekly completion rates:");
             ratesAlert.setContentText(contentText.toString());
+            updateStatus("Successfully checking the weekly completion rate","green");
             ratesAlert.showAndWait();
         } else {
             // Handle cancellation
@@ -757,35 +759,39 @@ public class MainController {
      */
     @FXML
     private void viewTop3HabitsAction() {
-        List<Habit> topHabits = getTop3HabitsByCompletionRate();
+        try {
+            List<Habit> topHabits = getTop3HabitsByCompletionRate();
 
-        if (topHabits.isEmpty()) {
-            updateStatus("No habit in the database.", "red");
-            return; // Exit if no habits are found
+            if (topHabits.isEmpty()) {
+                updateStatus("No habit in the database.", "red");
+                return; // Exit if no habits are found
+            }
+
+            StringBuilder contentText = new StringBuilder();
+            // Determine the message based on the number of habits retrieved
+            if (topHabits.size() >= 3) {
+                contentText.append("Top 3 habits for this week are: \n");
+            } else {
+                contentText.append("Mostly done habits are: \n");
+            }
+
+            // Construct a message listing the habits and their completion rates
+            for (int i = 0; i < topHabits.size(); i++) {
+                Habit habit = topHabits.get(i);
+                contentText.append(String.format("%s (%.2f%% complete)\n", habit.getHabit(), habit.getWeeklyCompletionRate()));
+            }
+
+            // Show the completion rates in an alert dialog
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Top 3 Habits");
+            alert.setHeaderText("Weekly Completion Rates");
+            alert.setContentText(contentText.toString());
+            alert.showAndWait();
+            updateStatus("Successfully checking on Top Habits", "green");
+        } catch (Error e) {
+            updateStatus("Something went wrong", "Red");
         }
-
-        StringBuilder contentText = new StringBuilder();
-        // Determine the message based on the number of habits retrieved
-        if (topHabits.size() >= 3) {
-            contentText.append("Top 3 habits for this week are: \n");
-        } else {
-            contentText.append("Mostly done habits are: \n");
-        }
-
-        // Construct a message listing the habits and their completion rates
-        for (int i = 0; i < topHabits.size(); i++) {
-            Habit habit = topHabits.get(i);
-            contentText.append(String.format("%s (%.2f%% complete)\n", habit.getHabit(), habit.getWeeklyCompletionRate()));
-        }
-
-        // Show the completion rates in an alert dialog
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Top 3 Habits");
-        alert.setHeaderText("Weekly Completion Rates");
-        alert.setContentText(contentText.toString());
-        alert.showAndWait();
     }
-
 
     /**
      * getCategoryChoice: the sets the category for the goal choice to the chosen category using a method in data
@@ -925,57 +931,57 @@ public class MainController {
     @FXML
     protected void setHabitsGeneralView() {
 
-            // Clear grid
-            habitsOverviewPane.getChildren().clear();
-            habitsOverviewPane.getColumnConstraints().clear();
-            habitsOverviewPane.getRowConstraints().clear();
-            habitsOverviewPane.setGridLinesVisible(false);
+        // Clear grid
+        habitsOverviewPane.getChildren().clear();
+        habitsOverviewPane.getColumnConstraints().clear();
+        habitsOverviewPane.getRowConstraints().clear();
+        habitsOverviewPane.setGridLinesVisible(false);
 
-            // Define rows and cols
-            Integer rows = habitsDropDown.getItems().size(); // Number of goals defines rows
-            Integer cols = 4; // Fixed
+        // Define rows and cols
+        Integer rows = habitsDropDown.getItems().size(); // Number of goals defines rows
+        Integer cols = 4; // Fixed
 
-            // Set constraints
-            for (int i = 0; i < rows; i++) {
-                RowConstraints rowConstraints = new RowConstraints();
-                rowConstraints.setValignment(VPos.CENTER);
-                rowConstraints.setVgrow(Priority.ALWAYS);
-                habitsOverviewPane.getRowConstraints().add(rowConstraints);
-            }
+        // Set constraints
+        for (int i = 0; i < rows; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setValignment(VPos.CENTER);
+            rowConstraints.setVgrow(Priority.ALWAYS);
+            habitsOverviewPane.getRowConstraints().add(rowConstraints);
+        }
 
-            for (int i = 0; i < cols; i++) {
-                ColumnConstraints columnConstraints = new ColumnConstraints();
-                columnConstraints.setHalignment(HPos.CENTER);
-                columnConstraints.setHgrow(Priority.NEVER);
-                columnConstraints.setPrefWidth(200);
-                columnConstraints.setMaxWidth(200);
-                habitsOverviewPane.getColumnConstraints().add(columnConstraints);
-            }
+        for (int i = 0; i < cols; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setHalignment(HPos.CENTER);
+            columnConstraints.setHgrow(Priority.NEVER);
+            columnConstraints.setPrefWidth(200);
+            columnConstraints.setMaxWidth(200);
+            habitsOverviewPane.getColumnConstraints().add(columnConstraints);
+        }
 
-            // Set-up fields for grid
-            ArrayList<Habit> habits = new ArrayList<>();
-            ArrayList<Goal> goals = new ArrayList<>();
-            for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
-                // Access habits hashset for specific goal
-                HashSet<Habit> habitsSet = e.getValue();
-                habits.addAll(habitsSet); // Add all habits to arraylist
-                goals.add(e.getKey());
-            }
+        // Set-up fields for grid
+        ArrayList<Habit> habits = new ArrayList<>();
+        ArrayList<Goal> goals = new ArrayList<>();
+        for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
+            // Access habits hashset for specific goal
+            HashSet<Habit> habitsSet = e.getValue();
+            habits.addAll(habitsSet); // Add all habits to arraylist
+            goals.add(e.getKey());
+        }
 
-            // Set-up the grid
-            for (int i = 0; i < rows; i++) {
+        // Set-up the grid
+        for (int i = 0; i < rows; i++) {
 
-                Habit habit = (Habit) habits.get(i);
-                Label habitName = new Label(habit.getHabit());
-                Label goalName = new Label(habit.getGoal());
-                Label category = new Label(habit.getCategory());
-                Label currentCount = new Label(String.valueOf(habit.getCurrentCount()));
+            Habit habit = (Habit) habits.get(i);
+            Label habitName = new Label(habit.getHabit());
+            Label goalName = new Label(habit.getGoal());
+            Label category = new Label(habit.getCategory());
+            Label currentCount = new Label(String.valueOf(habit.getCurrentCount()));
 
-                habitsOverviewPane.add(goalName, 0, i);
-                habitsOverviewPane.add(habitName, 1, i);
-                habitsOverviewPane.add(category, 2, i);
-                habitsOverviewPane.add(currentCount, 3, i);
-            }
+            habitsOverviewPane.add(goalName, 0, i);
+            habitsOverviewPane.add(habitName, 1, i);
+            habitsOverviewPane.add(category, 2, i);
+            habitsOverviewPane.add(currentCount, 3, i);
+        }
 
 
     }
@@ -1007,23 +1013,19 @@ public class MainController {
                 series.getData().add(new XYChart.Data<>(habit.getHabit(), habit.getCurrentCount()));
             }
         }
-        barChart.getData().add(series);
 
-        // Create an alert
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        barChart.getData().add(series);
         Dialog<BarChart> dialog = new Dialog();
         dialog.getDialogPane().setContent(barChart);
+
+        // Set the button types
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
+
+        // Here, cast the lookup result to Button before setting the action
+        Button closeButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        closeButton.setOnAction(e -> dialog.close());
+
         dialog.showAndWait();
-
-//        alert.setTitle("Visualized Habit Progression");
-//        alert.setHeaderText("Your Current Habit Progression");
-
-        // Set the bar chart as the content of the alert
-
-//        alert.getDialogPane().setContent(barChart);
-
-        // Display the alert
-//        alert.showAndWait();
 
     }
 

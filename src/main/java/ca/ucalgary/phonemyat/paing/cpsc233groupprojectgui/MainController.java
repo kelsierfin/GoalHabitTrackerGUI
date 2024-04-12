@@ -315,7 +315,9 @@ public class MainController {
     // Menu Items: Edit
 
     /**
-     * Create goal objects using data.java
+     * This method allows a user to create goal objects using data.java
+     *
+     * @author: Tania Rizwan
      */
     @FXML
     protected void menuAddGoalsAction() {
@@ -387,6 +389,11 @@ public class MainController {
 
     }
 
+    /**
+     * This method allows a user to delete a Goal object
+     *
+     * @author: Tania Rizwan
+     */
     @FXML
     protected void menuDeleteAGoalAction() {
         // Create a dialog box with goal dropdown
@@ -547,7 +554,9 @@ public class MainController {
     }
 
     /**
+     * This method allows a user to see the list of all habits, and delete one at a time.
      *
+     * @author Tania Rizwan
      */
     @FXML
     protected void menuDeleteHabitsAction() {
@@ -651,6 +660,12 @@ public class MainController {
 
 
     // Count Increasing Process
+
+    /**
+     * This method increments the habit count for a user-selected habit.
+     *
+     * @author Phone Myat Paing
+     */
     @FXML
     private void increaseHabitCount() {
         // Check if habitsDropDown itself is not null
@@ -695,6 +710,8 @@ public class MainController {
      * Handles the action triggered by clicking the "View the Weekly Completion" button.
      * It asks the user if they want to see their weekly completion percentage for each habit.
      * If confirmed, it displays another alert showing the completion rates for all habits.
+     *
+     * @author Phone Myat Paing
      */
     @FXML
     private void viewWeeklyCompletionAction() {
@@ -724,6 +741,13 @@ public class MainController {
         }
     }
 
+    /**
+     * This statistical method allows a user to see which habits are most productive.
+     * The Top 3 Habits are calculated using the completion rate.
+     * The completion rate is calculated using habit counts and the ideal count.
+     *
+     * @author Phone Myat Paing
+     */
     @FXML
     private void viewTop3HabitsAction() {
         List<Habit> topHabits = getTop3HabitsByCompletionRate();
@@ -933,14 +957,6 @@ public class MainController {
 
             // Set-up the grid
             for (int i = 0; i < rows; i++) {
-
-//            ArrayList<Habit> habits = new ArrayList<>();
-//            for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
-//                // Access habits hashset for specific goal
-//                HashSet<Habit> habitsSet = e.getValue();
-//                habits.addAll(habitsSet); // Add all habits to arraylist
-//            }
-
 
                 Habit habit = (Habit) habits.get(i);
                 Label habitName = new Label(habit.getHabit());

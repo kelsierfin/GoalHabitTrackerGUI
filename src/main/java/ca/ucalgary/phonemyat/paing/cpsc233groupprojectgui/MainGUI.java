@@ -7,6 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class launches the Habit Tracker GUI.
+ *
+ * @authors Phone, Sanbeer, Tania
+ */
+
 public class MainGUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {

@@ -885,47 +885,54 @@ public class MainController {
         }
     }
 
+    /**
+     * This method updates the Habits Overview tracker with the Habit objects and their properties.
+     * It is called anytime the Habit object is modified.
+     *
+     * @author: Tania Rizwan
+     */
     @FXML
     protected void setHabitsGeneralView() {
-        // Clear grid
-        habitsOverviewPane.getChildren().clear();
-        habitsOverviewPane.getColumnConstraints().clear();
-        habitsOverviewPane.getRowConstraints().clear();
-        habitsOverviewPane.setGridLinesVisible(false);
 
-        // Define rows and cols
-        Integer rows = habitsDropDown.getItems().size(); // Number of goals defines rows
-        Integer cols = 4; // Fixed
+            // Clear grid
+            habitsOverviewPane.getChildren().clear();
+            habitsOverviewPane.getColumnConstraints().clear();
+            habitsOverviewPane.getRowConstraints().clear();
+            habitsOverviewPane.setGridLinesVisible(false);
 
-        // Set constraints
-        for (int i = 0; i < rows; i++) {
-            RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setValignment(VPos.CENTER);
-            rowConstraints.setVgrow(Priority.ALWAYS);
-            habitsOverviewPane.getRowConstraints().add(rowConstraints);
-        }
+            // Define rows and cols
+            Integer rows = habitsDropDown.getItems().size(); // Number of goals defines rows
+            Integer cols = 4; // Fixed
 
-        for (int i = 0; i < cols; i++) {
-            ColumnConstraints columnConstraints = new ColumnConstraints();
-            columnConstraints.setHalignment(HPos.CENTER);
-            columnConstraints.setHgrow(Priority.NEVER);
-            columnConstraints.setPrefWidth(200);
-            columnConstraints.setMaxWidth(200);
-            habitsOverviewPane.getColumnConstraints().add(columnConstraints);
-        }
+            // Set constraints
+            for (int i = 0; i < rows; i++) {
+                RowConstraints rowConstraints = new RowConstraints();
+                rowConstraints.setValignment(VPos.CENTER);
+                rowConstraints.setVgrow(Priority.ALWAYS);
+                habitsOverviewPane.getRowConstraints().add(rowConstraints);
+            }
 
-        // Set-up fields for grid
-        ArrayList<Habit> habits = new ArrayList<>();
-        ArrayList<Goal> goals = new ArrayList<>();
-        for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
-            // Access habits hashset for specific goal
-            HashSet<Habit> habitsSet = e.getValue();
-            habits.addAll(habitsSet); // Add all habits to arraylist
-            goals.add(e.getKey());
-        }
+            for (int i = 0; i < cols; i++) {
+                ColumnConstraints columnConstraints = new ColumnConstraints();
+                columnConstraints.setHalignment(HPos.CENTER);
+                columnConstraints.setHgrow(Priority.NEVER);
+                columnConstraints.setPrefWidth(200);
+                columnConstraints.setMaxWidth(200);
+                habitsOverviewPane.getColumnConstraints().add(columnConstraints);
+            }
 
-        // Set-up the grid
-        for (int i = 0; i < rows; i++) {
+            // Set-up fields for grid
+            ArrayList<Habit> habits = new ArrayList<>();
+            ArrayList<Goal> goals = new ArrayList<>();
+            for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
+                // Access habits hashset for specific goal
+                HashSet<Habit> habitsSet = e.getValue();
+                habits.addAll(habitsSet); // Add all habits to arraylist
+                goals.add(e.getKey());
+            }
+
+            // Set-up the grid
+            for (int i = 0; i < rows; i++) {
 
 //            ArrayList<Habit> habits = new ArrayList<>();
 //            for (Map.Entry<Goal, HashSet<Habit>> e : data.getTracker().entrySet()) {
@@ -935,18 +942,21 @@ public class MainController {
 //            }
 
 
-            Habit habit = (Habit) habits.get(i);
-            Label habitName = new Label(habit.getHabit());
-            Label goalName = new Label(habit.getGoal());
-            Label category = new Label(habit.getCategory());
-            Label currentCount = new Label(String.valueOf(habit.getCurrentCount()));
+                Habit habit = (Habit) habits.get(i);
+                Label habitName = new Label(habit.getHabit());
+                Label goalName = new Label(habit.getGoal());
+                Label category = new Label(habit.getCategory());
+                Label currentCount = new Label(String.valueOf(habit.getCurrentCount()));
 
-            habitsOverviewPane.add(goalName, 0, i);
-            habitsOverviewPane.add(habitName, 1, i);
-            habitsOverviewPane.add(category, 2, i);
-            habitsOverviewPane.add(currentCount, 3, i);
-        }
+                habitsOverviewPane.add(goalName, 0, i);
+                habitsOverviewPane.add(habitName, 1, i);
+                habitsOverviewPane.add(category, 2, i);
+                habitsOverviewPane.add(currentCount, 3, i);
+            }
+
+
     }
+
 
     /**
      * showHabitBar: this  triggers the program to create a bar chart to display current habit counts

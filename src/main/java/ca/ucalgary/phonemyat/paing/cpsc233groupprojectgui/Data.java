@@ -41,6 +41,10 @@ public class Data {
         this.habits = new HashSet<>();
         this.matrix = new HashMap<>();
         this.matrix2 = new HashMap<>();
+        this.list10 = new ArrayList<>();
+        this.list20 = new ArrayList<>();
+        this.list30 = new ArrayList<>();
+        this.list40 = new ArrayList<>();
         this.fields = new HashMap<>();
         this.tracker = new HashMap<>();
         this.habitAndICounts = new HashMap<>();

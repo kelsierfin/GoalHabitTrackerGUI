@@ -330,6 +330,7 @@ public class MainController {
                            statusLabel.setText("Goal added successfully!");
                            statusLabel.setTextFill(Color.GREEN);
                            setGoalsDropDown();
+                           setTrackerGeneralView();
                        }
                    } else {
                        throw new NullPointerException();
@@ -712,6 +713,12 @@ public class MainController {
 
     // Tracker views
 
+    /**
+     * This method updates the General Overview tracker with the Goal objects and their properties.
+     * It is called anytime the Goal object is modified.
+     *
+     * @author: Tania Rizwan
+     */
     @FXML
     protected void setTrackerGeneralView() {
         // Clear grid
@@ -722,7 +729,7 @@ public class MainController {
 
         // Define rows and cols
         Integer rows = goalsDropDown.getItems().size(); // Number of goals defines rows
-        Integer cols = 4; // Fixed
+        Integer cols = 3; // Fixed
 
         // Set constraints
         for (int i = 0; i < rows; i++) {
@@ -736,11 +743,30 @@ public class MainController {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setHalignment(HPos.CENTER);
             columnConstraints.setHgrow(Priority.NEVER);
+            columnConstraints.setPrefWidth(200);
             columnConstraints.setMaxWidth(200);
             generalOverviewPane.getColumnConstraints().add(columnConstraints);
         }
 
+        // Set-up fields for grid
 
+        HashSet<Goal> goalHashSet = data.getGoals();
+        Object[] goalstoArray = goalHashSet.toArray(); // Convert to Array so we can access each element
+
+
+        // Set-up the grid
+        for (int i = 0; i < rows; i++) {
+
+            Goal goal = (Goal) goalstoArray[i];
+            Label goalName = new Label(goal.getGoal());
+            Label category = new Label(goal.getCategory());
+            Label idealCount = new Label(String.valueOf(goal.getIdealCount()));
+
+            generalOverviewPane.add(goalName, 0, i);
+            generalOverviewPane.add(category, 1, i);
+            generalOverviewPane.add(idealCount, 2, i);
+
+        }
 
     }
 

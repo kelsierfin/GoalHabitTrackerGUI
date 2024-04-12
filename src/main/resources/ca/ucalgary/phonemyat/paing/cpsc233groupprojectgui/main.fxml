@@ -159,14 +159,14 @@
                     <content>
                       <AnchorPane prefHeight="573.0" prefWidth="872.0">
                            <children>
-                              <HBox layoutX="4.0" layoutY="48.0" prefHeight="43.0" prefWidth="854.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="48.0">
+                              <HBox alignment="CENTER" layoutX="4.0" layoutY="48.0" prefHeight="43.0" prefWidth="854.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="48.0">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="80.0" prefWidth="201.0" text="Goal Name " textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="201.0" text="Goal Name " textAlignment="CENTER" />
                                     <Label alignment="CENTER" prefHeight="80.0" prefWidth="200.0" text="Category" textAlignment="CENTER" />
                                     <Label alignment="CENTER" prefHeight="79.0" prefWidth="248.0" text="Ideal Count" textAlignment="CENTER" />
                                  </children>
                               </HBox>
-                              <GridPane alignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
+                              <GridPane fx:id="generalOverviewPane" alignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

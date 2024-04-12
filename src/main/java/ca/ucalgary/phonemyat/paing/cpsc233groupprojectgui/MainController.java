@@ -14,6 +14,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.BarChart;
 
 import javax.management.StringValueExp;
 import java.io.File;
@@ -52,6 +56,10 @@ public class MainController {
     // Show the matrix button
     @FXML
     private Button matrixShower;
+
+    // Used to show the habitBarChart
+    @FXML
+    private Button habitBar;
 
     // GridPanes in Tracker Views
     @FXML
@@ -336,8 +344,7 @@ public class MainController {
                         if (idealCountAsInt <= 0 || idealCountAsInt > 7) {
                             throw new NullPointerException(); // Process idealCount as null;
                         } else if (data.createAGoal(goalName, Integer.parseInt(idealCount), null)) {
-                            statusLabel.setText("Goal added successfully!");
-                            statusLabel.setTextFill(Color.GREEN);
+                            updateStatus("Goal added successfully!", "green");
                             setGoalsDropDown();
                             setTrackerGeneralView();
                         }
@@ -345,11 +352,9 @@ public class MainController {
                         throw new NullPointerException();
                     }
                 } catch (NullPointerException e) {
-                    statusLabel.setText("Enter valid data!");
-                    statusLabel.setTextFill(Color.RED);
+                    updateStatus("Enter valid data!", "red");
                 } catch (NumberFormatException e) {
-                    statusLabel.setText("Enter valid data!");
-                    statusLabel.setTextFill(Color.RED);
+                    updateStatus("Enter valid data!", "red");
                 }
             }
 
@@ -400,17 +405,16 @@ public class MainController {
                 String selectedValue = goalsDropDownCopy.getValue();
 
                 if (selectedValue == null) {
-                    statusLabel.setText("Select a goal"); // Tell user to select a goal before clicking Delete button
-                    statusLabel.setTextFill(Color.RED);
+                    updateStatus("Select a goal", "red");  // Tell user to select a goal before clicking Delete button
                 } else {
                     if (data.goalDelete(selectedValue)) {
-                        statusLabel.setText("Goal deleted successfully");
-                        statusLabel.setTextFill(Color.GREEN);
+                        updateStatus("Goal deleted successfully", "green");
                         // Update goalsDropDown
                         setGoalsDropDown();
+                        // Update general tracker
+                        setTrackerGeneralView();
                     } else {
-                        statusLabel.setText("Error deleting goal");
-                        statusLabel.setTextFill(Color.RED);
+                        updateStatus("Error deleting goal", "red");
                     }
                 }
 
@@ -668,6 +672,9 @@ public class MainController {
         data.setCategory(categoryChoice, goalChoice);
         String t = "Voila! You have set goal: " + goalChoice + " into Category: " + categoryChoice;
         updateStatus(t, "blue");
+
+        // Update general tracker
+        setTrackerGeneralView();
     }
 
     /**
@@ -777,6 +784,48 @@ public class MainController {
             generalOverviewPane.add(idealCount, 2, i);
 
         }
+
+    }
+
+    /**
+     * showHabitBar: this  triggers the program to create a bar chart to display current habit counts
+     * @author: Sanbeer
+     */
+
+    @FXML
+    protected void showHabitBar() {
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("CurrentHabits");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Current Counts");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Current Habit Counts");
+
+        XYChart.Series<String, Number > series = new XYChart.Series<>();
+        series.setName("Current Standing");
+
+        for (Map.Entry<Goal, HashSet<Habit>> e : data.tracker.entrySet()) {
+            HashSet<Habit> set = e.getValue();
+
+            for(Habit habit: set){
+                series.getData().add(new XYChart.Data<>(habit.getHabit(), habit.getCurrentCount()));
+            }
+        }
+        barChart.getData().add(series);
+
+        // Create an alert
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Visualized Habit Progression");
+        alert.setHeaderText("Your Current Habit Progression");
+
+        // Set the bar chart as the content of the alert
+
+        alert.getDialogPane().setContent(barChart);
+
+        // Display the alert
+        alert.showAndWait();
 
     }
 

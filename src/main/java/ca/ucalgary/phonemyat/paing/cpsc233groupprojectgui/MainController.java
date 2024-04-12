@@ -6,10 +6,11 @@ import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.util.FileLoader;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.util.FileSaver;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -27,13 +28,9 @@ public class MainController {
     @FXML
     private Label statusLabel;
 
-    // Global Alert obj
-    Alert a = new Alert(Alert.AlertType.NONE);
-
-    // Goals
+    // Dropdowns
     @FXML
     private ChoiceBox<String> goalsDropDown;
-
 
     @FXML
     private ChoiceBox<String> habitsDropDown;
@@ -53,6 +50,13 @@ public class MainController {
     // Show the matrix button
     @FXML
     private Button matrixShower;
+
+    // GridPanes in Tracker Views
+    @FXML
+    private GridPane generalOverviewPane;
+
+    @FXML
+    private GridPane habitsOverviewPane;
 
 
     /**
@@ -579,8 +583,6 @@ public class MainController {
     }
 
 
-
-
     // Menu Help/ About
     /**
      * Display information about the application.
@@ -708,13 +710,40 @@ public class MainController {
 
     }
 
+    // Tracker views
 
+    @FXML
+    protected void setTrackerGeneralView() {
+        // Clear grid
+        generalOverviewPane.getChildren().clear();
+        generalOverviewPane.getColumnConstraints().clear();
+        generalOverviewPane.getRowConstraints().clear();
+        generalOverviewPane.setGridLinesVisible(true);
 
+        // Define rows and cols
+        Integer rows = goalsDropDown.getItems().size(); // Number of goals defines rows
+        Integer cols = 4; // Fixed
 
+        // Set constraints
+        for (int i = 0; i < rows; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setValignment(VPos.CENTER);
+            rowConstraints.setVgrow(Priority.ALWAYS);
+            generalOverviewPane.getRowConstraints().add(rowConstraints);
+        }
 
-
-
+        for (int i = 0; i < cols; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setHalignment(HPos.CENTER);
+            columnConstraints.setHgrow(Priority.NEVER);
+            columnConstraints.setMaxWidth(200);
+            generalOverviewPane.getColumnConstraints().add(columnConstraints);
+        }
 
 
 
     }
+
+
+
+}

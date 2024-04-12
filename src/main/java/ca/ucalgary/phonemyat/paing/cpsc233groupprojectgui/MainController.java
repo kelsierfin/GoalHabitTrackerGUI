@@ -11,13 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import javax.management.StringValueExp;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MainController {
@@ -304,7 +302,7 @@ public class MainController {
         dialog.getDialogPane().setContent(addGoalsGrid);
 
 
-        // Convert result to string when "Add" button is clicked. Result Converter processes user input whe the add button is clicked.
+        // Convert result to string when "Add" button is clicked. Result Converter processes user input when the "Add" button is clicked.
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addGoal) {
                try {
@@ -400,12 +398,13 @@ public class MainController {
         });
 
         dialog.show();
-
-
     }
 
     /**
-     * Goals Drop Down: lists all goals in the drop down to be used in various methods. Also used to update dropdown.
+     * Goals Drop Down: lists all goals in the drop down to be used in various methods.
+     * The drop down is updated anytime a goal is added/deleted.
+     *
+     * @author: Tania Rizwan
      */
     protected void setGoalsDropDown() {
         // First, clear the dropdown. (Prevents duplicates)
@@ -417,9 +416,94 @@ public class MainController {
             goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
             }
         }
+    }
+
+    /**
+     *
+     */
+    @FXML
+    protected void menuAddAHabitAction() {
+
+        // Create a dialog that allows user to select goal
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Add a Habit");
+
+        // Add buttons (Add and Cancel)
+        ButtonType add = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(add, cancel);
+        // Get the ButtonBar and configure button order
+        ButtonBar buttonBar = (ButtonBar) dialog.getDialogPane().lookup(".button-bar");
+        buttonBar.setButtonOrder(ButtonBar.BUTTON_ORDER_NONE);
+
+        // Create a copy of goalsDropDown
+        ChoiceBox<String> goalsDropDownCopy = new ChoiceBox<>();
+        goalsDropDownCopy.setItems(goalsDropDown.getItems());
+        goalsDropDownCopy.setValue(goalsDropDown.getValue());
+
+        // Create labels
+        Label addGoalHeader = new Label("Select a Goal");
+        Label addHabitsListHeader = new Label("Enter Habits (separated by a comma)");
+
+        // Create TextField to populate with list of habits
+        TextField habitsInput = new TextField();
+
+        // Create a VBox so we can store the dropdown with padding around, and place different elements
+        VBox container = new VBox(10);
+        container.setAlignment(Pos.CENTER);
+        container.getChildren().addAll(addGoalHeader, goalsDropDownCopy, addHabitsListHeader, habitsInput); // Add dropdown to the vbox
+        dialog.getDialogPane().setContent(container); // Add container to dialog
+
+        dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == add) {
+
+                    // Get the user-input
+                    String goalName = goalsDropDownCopy.getValue();
+                    String habitsInputAsString = habitsInput.getText().replaceAll("\\s", ""); // Remove all whitespace
+                    String[] habitsInputSplit = habitsInputAsString.split(",");
+                    List<String> habitsInputList = Arrays.asList(habitsInputSplit);
+                    ArrayList<String> habitsList = new ArrayList<>(habitsInputList);
+
+                    // Input error handling
+                    // Handle if user clicks habits textfield, but doesn't enter anything
+                    if (habitsInputAsString.equals("") || habitsInputAsString.equals(" ")) {
+                        habitsList.clear(); //Make list empty
+                    }
+
+                    if (habitsList.isEmpty()) {
+                        updateStatus("Enter a valid list of habits and re-try", "red");
+                    }
+                    if (goalName == null) {
+                        updateStatus("Select a valid goal and re-try", "red");
+                    }
+
+                    // Send data to data.java
+                    data.addHabits(goalName, habitsList, 0);
+                    updateStatus("Habits added successfully!", "green");
+                    // Update habitsDropDown
+                    populateHabitsDropDown();
+
+                }
+                return "";
+        });
+
+        dialog.show();
+
+
+
+        dialog.show();
+
+
+
+
+
+
 
 
     }
+
+
+
 
     // Menu Help/ About
     /**

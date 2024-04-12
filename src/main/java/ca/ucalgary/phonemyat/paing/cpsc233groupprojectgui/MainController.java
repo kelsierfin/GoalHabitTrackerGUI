@@ -482,15 +482,25 @@ public class MainController {
     @FXML
     protected void showMatrix(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        StringBuilder sb = new StringBuilder();
-        sb.append("Goals in Urgent and Important : " + data.list10 + "\n" +
-                "Goals in Urgent and Not Important : " + (data.list20) + "\n" +
-                "Goals in Important and Not Urgent : " + (data.list30) + "\n" +
-                "Goals in Not Important and Not Urgent : " + (data.list40) + "\n");
+
         alert.setTitle("Goals in Eisenhower Matrix");
         if(data.matrix2.containsKey("Urgent and Important")){
             alert.setHeaderText("Here is your current Eisenhower Matrix");
-            alert.setContentText(sb.toString());
+
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+
+            int row = 0;
+            for (Map.Entry<String, ArrayList<String>> entry :data.matrix2.entrySet()) {
+                Label keyLabel = new Label(entry.getKey() + ":");
+                String combinedValues = String.join(", ", entry.getValue());
+                Label valueLabel = new Label(combinedValues);
+                gridPane.add(keyLabel, 0, row);
+                gridPane.add(valueLabel, 1, row);
+                row++;
+            }
+            alert.getDialogPane().setContent(gridPane);
 
             alert.showAndWait();
             updateStatus("Here is your Eisenhower Matrix","blue");

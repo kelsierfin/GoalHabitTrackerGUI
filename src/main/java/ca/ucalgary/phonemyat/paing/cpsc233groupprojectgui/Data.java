@@ -20,7 +20,6 @@ public class Data {
     protected static  ArrayList<Integer> choicesArrayList2; // choices for the goals for categorization in order of input.
 
     protected static HashSet<Goal> goals; // Hashset to contain all goal objects
-    protected static HashSet<Habit> habits; // Hashset to contain habits (only used in FileLoader)
     protected static HashMap<String, ArrayList<String>> matrix; // intializes the eisenhower matrix so that it can be changed anywhere in package
 
     protected static HashMap<String, ArrayList<String>> fields; // intializes the categorization matrix so that it can be changed anywhere in packag
@@ -38,7 +37,6 @@ public class Data {
     public Data() {
         this.choicesArrayList2 = new ArrayList<>();
         this.goals = new HashSet<>();
-        this.habits = new HashSet<>();
         this.matrix = new HashMap<>();
         this.matrix2 = new HashMap<>();
         this.list10 = new ArrayList<>();

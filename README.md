@@ -12,7 +12,7 @@ Description: This application is designed to track a user's goals, habits and th
 
 Use .jar file or build using source code yourself
 
-Uses Java 21 JDK, Java 21 SDK, JUnit 5
+Uses Java 21 JDK, JavaFX 21 SDK, JUnit 5.8.1
 
 
 

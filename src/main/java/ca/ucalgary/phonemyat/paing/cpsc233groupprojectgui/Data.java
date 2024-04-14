@@ -576,25 +576,25 @@ public class Data {
 
         // Iterate through tracker to get habits for your goal
         for (Map.Entry<Goal, HashSet<Habit>> e : Data.getTracker().entrySet()) { // e = [goal, [habit1, habit2]]
-//            if (e.getKey().equals(goalChoice)) {
-////                e.getKey().setCategory(categoryChoice);
-//                HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
-//                for (Habit habit : habitsForGoal) {
-//                    habit.setCategory(categoryChoice);
-//                }
+            if (e.getKey().getGoal().equals(goalChoice)) {
+//                e.getKey().setCategory(categoryChoice);
+                HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
+                for (Habit habit : habitsForGoal) {
+                    habit.setCategory(categoryChoice);
+                }
+            }
+
+//            HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
+//            for (Habit habit : habitsForGoal) {
+//                habit.setCategory(categoryChoice);
 //            }
 
-            HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
-            for (Habit habit : habitsForGoal) {
-                habit.setCategory(categoryChoice);
-            }
-
         }
-        for (Goal goal : goals) {
-            if (goal.getGoal().equals(goalChoice)) {
-                goal.setCategory(categoryChoice);
-            }
-        }
+//        for (Goal goal : goals) {
+//            if (goal.getGoal().equals(goalChoice)) {
+//                goal.setCategory(categoryChoice);
+//            }
+//        }
     }
     /**
      * @param: matrixChoice - this is the quadrant to put the goal into , goalChoice2 - the goal we are going to be putting into quadrant

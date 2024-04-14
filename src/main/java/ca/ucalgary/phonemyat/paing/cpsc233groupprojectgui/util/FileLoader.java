@@ -65,8 +65,6 @@ public class FileLoader {
 
                     habitsList.add(habit.getHabit());
                     data.addHabits(goalName, habitsList, habitCurrentCount);
-                    System.out.println(habitsList);
-                    System.out.println(habitCurrentCount);
 
                 } else {
                     System.out.println("Not enough data!" + parts.length);

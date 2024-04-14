@@ -143,7 +143,7 @@ public class MainController {
      * @author: Phone Myat Paing
      */
     @FXML
-    private void saveAction() {
+    protected void saveAction() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter for text files
@@ -178,7 +178,7 @@ public class MainController {
      * @author: Phone Myat Paing
      */
     @FXML
-    private void loadAction() {
+    protected void loadAction() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter for CSV files
@@ -199,6 +199,7 @@ public class MainController {
             // Load the data from the file
             Data loadedData = FileLoader.load(file);
 
+
             if (loadedData != null) {
                 data = loadedData; // Update the data model
                 populateHabitsDropDown();
@@ -213,6 +214,28 @@ public class MainController {
             setHabitsGeneralView();
         }
 
+    }
+
+    /**
+     * This method takes in an argument from the command-line to allow GUI to run with pre-loaded data.
+     * It is separate to the loadAction method, since that method cannot use an input (as it is an EventHandler method)
+     * @param file - The file to be loaded in
+     * @author Tania Rizwan, Johnathan Hudson (source code from Demo3 video)
+     */
+    protected void loadFromCMDLine(File file) {
+        Data data = FileLoader.load(file);
+        if (data == null) {
+            updateStatus("Failed to load data from file.", "red");
+        } else {
+            MainController.data = data;
+            updateStatus("Data loaded successfully from " + file.getName(), "green");
+        }
+        populateHabitsDropDown();
+        setGoalsDropDown();
+            // Update general tracker
+        setTrackerGeneralView();
+            // Update habitsGeneralView
+        setHabitsGeneralView();
     }
 
 
@@ -472,14 +495,17 @@ public class MainController {
      */
     protected void setGoalsDropDown() {
         // First, clear the dropdown. (Prevents duplicates)
-        goalsDropDown.getItems().clear();
-        // Populate dropdown with each goal in HashSet goals (from Data.java)
-        HashSet<Goal> goals = data.getGoals();
-        for (Goal goal : goals) {
-            if (goal != null) {
-                goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
+        if (goalsDropDown != null){
+            goalsDropDown.getItems().clear();
+            // Populate dropdown with each goal in HashSet goals (from Data.java)
+            HashSet<Goal> goals = data.getGoals();
+            for (Goal goal : goals) {
+                if (goal != null) {
+                    goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
+                }
             }
         }
+
     }
 
     /**

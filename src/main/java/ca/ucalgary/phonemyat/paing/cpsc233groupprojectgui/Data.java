@@ -567,15 +567,23 @@ public class Data {
 
         // Iterate through tracker to get habits for your goal
         for (Map.Entry<Goal, HashSet<Habit>> e : Data.getTracker().entrySet()) { // e = [goal, [habit1, habit2]]
-                HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
-                for (Habit habit : habitsForGoal) {
-                    habit.setCategory(categoryChoice);
-                }
+//            if (e.getKey().equals(goalChoice)) {
+////                e.getKey().setCategory(categoryChoice);
+//                HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
+//                for (Habit habit : habitsForGoal) {
+//                    habit.setCategory(categoryChoice);
+//                }
+//            }
+
+            HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
+            for (Habit habit : habitsForGoal) {
+                habit.setCategory(categoryChoice);
+            }
+
         }
         for (Goal goal : goals) {
             if (goal.getGoal().equals(goalChoice)) {
                 goal.setCategory(categoryChoice);
-
             }
         }
     }

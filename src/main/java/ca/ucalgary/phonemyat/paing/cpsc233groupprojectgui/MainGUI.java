@@ -26,7 +26,12 @@ public class MainGUI extends Application {
         MainController controller = fxmlLoader.getController();
 //        System.out.println(file);
         controller.initialize();
-        controller.loadFromCMDLine(file);
+
+
+        if (file != null){
+            controller.loadFromCMDLine(file);
+        }
+
 
 
         stage.setScene(scene);

@@ -470,6 +470,8 @@ public class MainController {
                         updateStatus("Goal deleted successfully", "green");
                         // Update goalsDropDown
                         setGoalsDropDown();
+                        // Update habitsDropDown
+                        populateHabitsDropDown();
                         // Update general tracker
                         setTrackerGeneralView();
                         // Update habitsGeneralView

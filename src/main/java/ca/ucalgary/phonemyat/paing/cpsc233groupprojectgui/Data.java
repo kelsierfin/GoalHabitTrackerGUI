@@ -101,10 +101,19 @@ public class Data {
 
         boolean goalFound = false;
 
-        for (Goal goal : goals) {
-            if (goal.getGoal().equals(goalToDelete)){
-                System.out.println("Successfully deleted: " + goal.getGoal());
-                goals.remove(goal);
+//        for (Goal goal : goals) {
+//            if (goal.getGoal().equals(goalToDelete)){
+//                System.out.println("Successfully deleted: " + goal.getGoal());
+//                goals.remove(goal);
+//                goalFound = true;
+//                return true;
+//            }
+//        }
+
+        for (Map.Entry<Goal, HashSet<Habit>> e: tracker.entrySet()) {
+            if (e.getKey().getGoal().equals(goalToDelete)) {
+                tracker.remove(e.getKey());
+                System.out.println("Successfully deleted: " + e.getKey().getGoal());
                 goalFound = true;
                 return true;
             }

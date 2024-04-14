@@ -564,6 +564,21 @@ public class Data {
      * @return:none
      */
     public static void setCategory(String categoryChoice, String goalChoice) {
+
+        // Iterate through tracker to get habits for your goal
+        for (Map.Entry<Goal, HashSet<Habit>> e : tracker.entrySet()) { // e = [goal, [habit1, habit2]]
+            if (e.getKey().equals(goalChoice)) {
+
+//                e.getKey().setCategory(categoryChoice);
+
+                HashSet<Habit> habitsForGoal = e.getValue(); // Get hashset for all habits for goalChoice
+
+                for (Habit habit : habitsForGoal) {
+                    habit.setCategory(categoryChoice);
+                }
+            }
+        }
+
         for (Goal goal : goals) {
             if (goal.getGoal().equals(goalChoice)) {
                 goal.setCategory(categoryChoice);

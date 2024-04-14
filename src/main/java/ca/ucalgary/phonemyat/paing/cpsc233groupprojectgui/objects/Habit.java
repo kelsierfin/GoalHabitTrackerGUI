@@ -40,6 +40,8 @@ public class Habit extends Goal{
         this.currentCount++;
     }
 
+
+
     /**
      * Calculates the weekly completion rate of a habit based on its current and ideal counts.
      * The completion rate is determined by dividing the current count by the ideal count,

@@ -2,13 +2,15 @@
 ## About
 Author Names: Tania Rizwan, Phone Myat Paing, Sanbeer Shafin
 
+Author Tutorials: Tania: T10, Sanbeer: T09, Phone: T14 
+
 Author Emails: tania.rizwan@ucalgary.ca, phonemyat.paing@ucalgary.ca, sanbeer.shafin@ucalgary.ca
 
 Version: Final
 
 Description: This application is designed to track a user's goals, habits and their important related information.
 
--> The user  can add goals, habits, add ideal counts to goals, add current count to goals & habits, set categories for goals and their associated habits, 
+-> The user  can add goals, habits, add ideal counts(this is how many days of the week you may want to track the goal/habit) to goals, add current count to goals & habits, set categories for goals and their associated habits, 
 prioritize the order of your goal completion in an Eisenhower matrix, store your current progress to 
 a .csv file,  load from .csv file and reset all progress. 
 
@@ -18,7 +20,7 @@ standings in your habit using a bar chart
 4)A Visualized Eisenhower Matrix ranking your 
 goals in order of importance & urgency
 
--> Things to know: Each habit is connected to a goal
+-> Things to know: Each habit is connected(inherited) to a goal
 
 ## Run This Program
 

@@ -86,6 +86,7 @@ public class Data {
             return false;
         } else{
             goals.add(goal);
+            tracker.put(goal, null);
             System.out.printf("Goal added successfully!\nYour goal is: " + goal.getGoal() + " and your ideal count is: " + goal.getIdealCount() + "\n");
             return true;
         }

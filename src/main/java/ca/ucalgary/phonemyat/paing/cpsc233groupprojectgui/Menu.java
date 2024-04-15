@@ -460,8 +460,10 @@ public class Menu {
                     " Ideal Count: " + entry.getKey().getIdealCount() +
                     " Category: " + entry.getKey().getCategory());
 
-            for (Habit habit : entry.getValue()) {
-                System.out.println("Habit: " + habit.getHabit() + " Current Count: " + habit.getCurrentCount());
+            if (entry.getValue() != null) {
+                for (Habit habit : entry.getValue()) {
+                    System.out.println("Habit: " + habit.getHabit() + " Current Count: " + habit.getCurrentCount());
+                }
             }
         }
 

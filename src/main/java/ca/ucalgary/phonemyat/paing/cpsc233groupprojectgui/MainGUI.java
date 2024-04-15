@@ -31,9 +31,6 @@ public class MainGUI extends Application {
         if (file != null){
             controller.loadFromCMDLine(file);
         }
-
-
-
         stage.setScene(scene);
         stage.show();
 

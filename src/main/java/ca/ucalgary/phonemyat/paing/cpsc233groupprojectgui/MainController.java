@@ -1,5 +1,9 @@
+// Import Package
+
 package ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui;
 
+
+// Imports
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Goal;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.objects.Habit;
 import ca.ucalgary.phonemyat.paing.cpsc233groupprojectgui.util.FileLoader;
@@ -18,7 +22,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.BarChart;
-
 import javax.management.StringValueExp;
 import java.io.File;
 import java.util.*;
@@ -76,6 +79,7 @@ public class MainController {
     @FXML
     private GridPane habitsOverviewPane;
 
+    // PROGRAM SET-UP
 
     /**
      * Initialize method to pre-load (set-up GUI)
@@ -112,6 +116,26 @@ public class MainController {
         }
     }
 
+    /**
+     * Goals Drop Down: lists all goals in the drop down to be used in various methods.
+     * The drop down is updated anytime a goal is added/deleted.
+     *
+     * @author: Tania Rizwan
+     */
+    protected void setGoalsDropDown() {
+        // First, clear the dropdown. (Prevents duplicates)
+        if (goalsDropDown != null){
+            goalsDropDown.getItems().clear();
+            // Populate dropdown with each goal in HashSet goals (from Data.java)
+            HashSet<Goal> goals = data.getGoals();
+            for (Goal goal : goals) {
+                if (goal != null) {
+                    goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
+                }
+            }
+        }
+
+    }
 
     /**
      * Update the status label with specified message and color.
@@ -135,6 +159,61 @@ public class MainController {
             statusLabel.layout();
         });
     }
+
+    /**
+     * * This method is part of the reset process that reinitializes the application's data to a default state.
+     *
+     * @author: Phone Myat Paing
+     */
+    private void resetAllData() {
+        if (choicesArrayList2 != null) {
+            choicesArrayList2.clear();
+        }
+        if (goals != null) {
+            goals.clear();
+        }
+        if (matrix != null) {
+            matrix.clear();
+        }
+        if (fields != null) {
+            fields.clear();
+        }
+        if (matrix2 != null) {
+            matrix2.clear();
+        }
+        if (list10 != null) {
+            list10.clear();
+        }
+        if (list20 != null) {
+            list20.clear();
+        }
+        if (list30 != null) {
+            list30.clear();
+        }
+        if (list40 != null) {
+            list40.clear();
+        }
+
+        if (goalsDropDown != null) {
+            goalsDropDown.getItems().clear();
+        }
+
+        if (habitsDropDown != null) {
+            habitsDropDown.getItems().clear();
+            for (Map.Entry<Goal, HashSet<Habit>> e: tracker.entrySet()) {
+                e.getValue().clear();
+            }
+        }
+
+        generalOverviewPane.getChildren().clear();
+        generalOverviewPane.getColumnConstraints().clear();
+        generalOverviewPane.getRowConstraints().clear();
+        generalOverviewPane.setGridLinesVisible(false);
+
+    }
+
+
+    // MENU ITEMS
 
     /**
      * Save the current tracker to a file.
@@ -237,113 +316,6 @@ public class MainController {
             // Update habitsGeneralView
         setHabitsGeneralView();
     }
-
-
-    /**
-     * Invoked when the user selects the 'Reset' option from the menu.
-     * This method displays a confirmation dialog to the user. If the user
-     * confirms the action, it attempts to reset all application data and the CSV file.
-     * The method will update the GUI with the result of the reset operation.
-     * If the user cancels the operation, no changes are made, and a status update is displayed indicating that the reset has been canceled.
-     *
-     * @author: Phone Myat Paing
-     */
-    @FXML
-    private void resetDataAction() {
-        // Show confirmation dialog
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Reset Confirmation");
-        alert.setHeaderText("Reset All Data");
-        alert.setContentText("Are you sure you want to reset all data? This action cannot be undone.");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Perform the reset
-            try {
-                resetAllData();
-                updateStatus("All data have been reset successfully.", "green");
-            } catch (Exception e) {
-                updateStatus("Failed to reset data: " + e.getMessage(), "red");
-            }
-        } else {
-            // User chose cancel
-            updateStatus("Resetting process cancelled.", "red");
-        }
-
-        // Update general tracker
-        setTrackerGeneralView();
-        // Update habitsGeneralView
-        setHabitsGeneralView();
-    }
-
-
-    /**
-     * * This method is part of the reset process that reinitializes the application's data to a default state.
-     *
-     * @author: Phone Myat Paing
-     */
-    private void resetAllData() {
-        if (choicesArrayList2 != null) {
-            choicesArrayList2.clear();
-        }
-        if (goals != null) {
-            goals.clear();
-        }
-        if (matrix != null) {
-            matrix.clear();
-        }
-        if (fields != null) {
-            fields.clear();
-        }
-        if (matrix2 != null) {
-            matrix2.clear();
-        }
-        if (list10 != null) {
-            list10.clear();
-        }
-        if (list20 != null) {
-            list20.clear();
-        }
-        if (list30 != null) {
-            list30.clear();
-        }
-        if (list40 != null) {
-            list40.clear();
-        }
-
-        if (goalsDropDown != null) {
-            goalsDropDown.getItems().clear();
-        }
-
-        if (habitsDropDown != null) {
-            habitsDropDown.getItems().clear();
-            for (Map.Entry<Goal, HashSet<Habit>> e: tracker.entrySet()) {
-                e.getValue().clear();
-            }
-        }
-
-        generalOverviewPane.getChildren().clear();
-        generalOverviewPane.getColumnConstraints().clear();
-        generalOverviewPane.getRowConstraints().clear();
-        generalOverviewPane.setGridLinesVisible(false);
-
-    }
-
-
-    /**
-     * Quit the application.
-     * This method is invoked when the user selects the 'Quit' option from the menu.
-     *
-     * @author: Phone Myat Paing
-     */
-    @FXML
-    public void closeAction() {
-        // Close the application
-        Platform.exit();
-    }
-
-
-    // Menu Items: Edit
 
     /**
      * This method allows a user to create goal objects using data.java
@@ -489,26 +461,7 @@ public class MainController {
         dialog.show();
     }
 
-    /**
-     * Goals Drop Down: lists all goals in the drop down to be used in various methods.
-     * The drop down is updated anytime a goal is added/deleted.
-     *
-     * @author: Tania Rizwan
-     */
-    protected void setGoalsDropDown() {
-        // First, clear the dropdown. (Prevents duplicates)
-        if (goalsDropDown != null){
-            goalsDropDown.getItems().clear();
-            // Populate dropdown with each goal in HashSet goals (from Data.java)
-            HashSet<Goal> goals = data.getGoals();
-            for (Goal goal : goals) {
-                if (goal != null) {
-                    goalsDropDown.getItems().add(String.valueOf(goal.getGoal()));
-                }
-            }
-        }
 
-    }
 
     /**
      * This method prompts the user to select a Goal and enter a list of habits for it.
@@ -695,7 +648,58 @@ public class MainController {
     }
 
 
-    // Count Increasing Process
+    /**
+     * Invoked when the user selects the 'Reset' option from the menu.
+     * This method displays a confirmation dialog to the user. If the user
+     * confirms the action, it attempts to reset all application data and the CSV file.
+     * The method will update the GUI with the result of the reset operation.
+     * If the user cancels the operation, no changes are made, and a status update is displayed indicating that the reset has been canceled.
+     *
+     * @author: Phone Myat Paing
+     */
+    @FXML
+    private void resetDataAction() {
+        // Show confirmation dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Reset Confirmation");
+        alert.setHeaderText("Reset All Data");
+        alert.setContentText("Are you sure you want to reset all data? This action cannot be undone.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Perform the reset
+            try {
+                resetAllData();
+                updateStatus("All data have been reset successfully.", "green");
+            } catch (Exception e) {
+                updateStatus("Failed to reset data: " + e.getMessage(), "red");
+            }
+        } else {
+            // User chose cancel
+            updateStatus("Resetting process cancelled.", "red");
+        }
+
+        // Update general tracker
+        setTrackerGeneralView();
+        // Update habitsGeneralView
+        setHabitsGeneralView();
+    }
+
+
+    /**
+     * Quit the application.
+     * This method is invoked when the user selects the 'Quit' option from the menu.
+     *
+     * @author: Phone Myat Paing
+     */
+    @FXML
+    public void closeAction() {
+        // Close the application
+        Platform.exit();
+    }
+
+
+    // GUI FUNCTIONALITY
 
     /**
      * This method increments the habit count for a user-selected habit.
@@ -892,7 +896,49 @@ public class MainController {
 
     }
 
-    // Tracker views
+    /**
+     * showHabitBar: this  triggers the program to create a bar chart to display current habit counts
+     * @author: Sanbeer
+     */
+
+    @FXML
+    protected void showHabitBar() {
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("CurrentHabits");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Current Counts");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Current Habit Counts");
+
+        XYChart.Series<String, Number > series = new XYChart.Series<>();
+        series.setName("Current Standing");
+
+        for (Map.Entry<Goal, HashSet<Habit>> e : data.tracker.entrySet()) {
+            HashSet<Habit> set = e.getValue();
+
+            for(Habit habit: set){
+                series.getData().add(new XYChart.Data<>(habit.getHabit(), habit.getCurrentCount()));
+            }
+        }
+
+        barChart.getData().add(series);
+        Dialog<BarChart> dialog = new Dialog();
+        dialog.getDialogPane().setContent(barChart);
+
+        // Set the button types
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
+
+        // Here, cast the lookup result to Button before setting the action
+        Button closeButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        closeButton.setOnAction(e -> dialog.close());
+
+        dialog.showAndWait();
+
+    }
+
+    // TRACKER VIEWS
 
     /**
      * This method updates the General Overview tracker with the Goal objects and their properties.
@@ -1015,47 +1061,7 @@ public class MainController {
     }
 
 
-    /**
-     * showHabitBar: this  triggers the program to create a bar chart to display current habit counts
-     * @author: Sanbeer
-     */
 
-    @FXML
-    protected void showHabitBar() {
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("CurrentHabits");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Current Counts");
-
-        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setTitle("Current Habit Counts");
-
-        XYChart.Series<String, Number > series = new XYChart.Series<>();
-        series.setName("Current Standing");
-
-        for (Map.Entry<Goal, HashSet<Habit>> e : data.tracker.entrySet()) {
-            HashSet<Habit> set = e.getValue();
-
-            for(Habit habit: set){
-                series.getData().add(new XYChart.Data<>(habit.getHabit(), habit.getCurrentCount()));
-            }
-        }
-
-        barChart.getData().add(series);
-        Dialog<BarChart> dialog = new Dialog();
-        dialog.getDialogPane().setContent(barChart);
-
-        // Set the button types
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
-
-        // Here, cast the lookup result to Button before setting the action
-        Button closeButton = (Button) dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
-        closeButton.setOnAction(e -> dialog.close());
-
-        dialog.showAndWait();
-
-    }
 
 }
 

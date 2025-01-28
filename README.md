@@ -1,10 +1,6 @@
 # The Perfect Weekly Habit Tracking Program
 ## About
-Author Names: Tania Rizwan, Phone Myat Paing, Sanbeer Shafin
-
-Author Tutorials: Tania: T10, Sanbeer: T09, Phone: T14 
-
-Author Emails: tania.rizwan@ucalgary.ca, phonemyat.paing@ucalgary.ca, sanbeer.shafin@ucalgary.ca
+Author Names: Sanbeer Shafin, Tania Rizwan, Phone Myat Piang
 
 Version: Final
 
